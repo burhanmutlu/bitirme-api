@@ -6,22 +6,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    @PostMapping("/v1/users")
+    public void createUser(@RequestBody User user) {
+        userService.createUser(user);
     }
 
-    @GetMapping
+    @GetMapping("/v1/users")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
+    }
+
+    @GetMapping("/v1/users/{userId}")
+    public Optional<User> getUserById(@PathVariable Long userId) {
+        return userService.getById(userId);
+    }
+
+    @RequestMapping(value = "/v1/users")
+    public User getByName(@RequestParam(value="userName") String userName) {
+        return userService.getByName(userName);
     }
 
 

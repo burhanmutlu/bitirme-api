@@ -22,4 +22,12 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public Optional<User> getById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public User getByName(String name) {
+        return userRepository.findByName(name);
+    }
+
 }

@@ -12,7 +12,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "student_name")
     private String name;
+
+    @Column(name = "email")
     private String email;
 
 }
