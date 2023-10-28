@@ -22,11 +22,11 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> getById(Long id) {
+    public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
     }
 
-    public User getByName(String name) {
+    public List<User> getUsersByName(String name) {
         return userRepository.findByName(name);
     }
 
