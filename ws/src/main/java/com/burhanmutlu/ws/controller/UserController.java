@@ -13,12 +13,26 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class UserController {
 
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping("/v1/users")
     public void createUser(@RequestBody User user) {
         userService.createUser(user);
+    }
+
+    @PutMapping("/v1/users")
+    public void updateUser(@RequestBody User user) {
+        userService.createUser(user);
+    }
+
+    @DeleteMapping("/v1/users/{userId}")
+    public void deleteUser(@PathVariable Long userId) {
+        userService.deleteUserById(userId);
     }
 
     @GetMapping("/v1/users")
@@ -26,19 +40,14 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @RequestMapping(value = "/v1/users/{name}")
+    @RequestMapping(value = "/v1/users/{name}", method = RequestMethod.GET)
     public List<User> getUsersByName(@PathVariable String name) {
         return userService.getUsersByName(name);
     }
 
     @GetMapping("/v1/user/{userId}")
-    public Optional<User> getUserById(@PathVariable Long userId) {
-
-        Optional<User> user = userService.getUserById(userId);
-
-        if( (userId >= userService.getAllUsers().size()) || (userId < 0) || user.isEmpty() )
-            throw new UserNotFoundException("User id not found - " + userId);
-        return user;
+    public User getUserById(@PathVariable Long userId) {
+        return  userService.getUserById(userId);
     }
 
 }
