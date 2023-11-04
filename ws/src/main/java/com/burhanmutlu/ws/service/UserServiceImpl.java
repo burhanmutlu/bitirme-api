@@ -11,9 +11,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service // bu sayede autowired calisiyor
+@Service // This way autowired works
 public class UserServiceImpl implements UserService{
-
 
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
@@ -28,6 +27,13 @@ public class UserServiceImpl implements UserService{
         this.userRepository = userRepository;
     }
 
+    //TODO: Do not share any user information with anyone
+
+    /**
+     * Creates a new user
+     * @param user Is the object of the user to be created
+     * @return Returned new user
+     */
     @Override
     public User createUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
