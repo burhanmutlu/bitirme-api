@@ -2,24 +2,15 @@ package com.burhanmutlu.ws.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.sql.Time;
-import java.util.Date;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "files")
-public class File {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+public class File extends BaseEntity {
 
     @Column(name = "size")
     private Double size;
@@ -29,13 +20,5 @@ public class File {
 
     @Column(name = "path")
     private String path;
-
-    @Temporal(TemporalType.DATE)
-    @Column(name = "created_at")
-    private Date createdAt;
-
-    @Temporal(TemporalType.DATE)
-    @Column(name = "updated_at")
-    private Date updatedAt;
 
 }

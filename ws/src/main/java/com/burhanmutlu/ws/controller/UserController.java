@@ -1,13 +1,11 @@
 package com.burhanmutlu.ws.controller;
 
 import com.burhanmutlu.ws.entity.User;
-import com.burhanmutlu.ws.exception.UserNotFoundException;
 import com.burhanmutlu.ws.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
