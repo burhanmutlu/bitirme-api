@@ -27,7 +27,4 @@ public class User extends BaseEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @OneToOne(mappedBy = "user")
-    private Account account;
-
 }

@@ -1,29 +1,29 @@
 package com.burhanmutlu.ws.service;
 
+import com.burhanmutlu.ws.dto.RegistrationRequest;
 import com.burhanmutlu.ws.entity.User;
 import com.burhanmutlu.ws.exception.UserNotFoundException;
 import com.burhanmutlu.ws.repository.UserRepository;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service // This way autowired works
+@NoArgsConstructor
 public class UserServiceImpl implements UserService{
 
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl() {
-        passwordEncoder = new BCryptPasswordEncoder();
-    }
-
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
-        this();
+        passwordEncoder = new BCryptPasswordEncoder();
         this.userRepository = userRepository;
     }
 
@@ -35,37 +35,33 @@ public class UserServiceImpl implements UserService{
      * @return Returned new user
      */
     @Override
-    public User createUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+    public Boolean createUser(RegistrationRequest registrationRequest) {
+        try {
+            User user = User.builder()
+                    .name(registrationRequest.getName())
+                    .surname(registrationRequest.getSurname())
+                    .email(registrationRequest.getEmail())
+                    .password(passwordEncoder.encode(registrationRequest.getPassword()))
+                    .phoneNumber(registrationRequest.getPhoneNumber())
+                    .build();
+            userRepository.save(user);
+            return true;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return false;
+        }
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
+    public User getUserByEmail(String email) {
 
-    @Override
-    public User getUserById(Long id) {
-        Optional<User> result = userRepository.findById(id);
+        User user = (User) userRepository.findByEmail(email);
 
-        User user = null;
-        if(result.isPresent()) {
-            user = result.get();
-        } else {
-            throw new UserNotFoundException("User id not found - " + id);
+        if(user == null) {
+            throw new UserNotFoundException("User email not found - " + email);
         }
 
         return user;
     }
 
-    @Override
-    public List<User> getUsersByName(String name) {
-        return userRepository.findByName(name);
-    }
-
-    @Override
-    public void deleteUserById(Long id) {
-        userRepository.deleteById(id);
-    }
 }

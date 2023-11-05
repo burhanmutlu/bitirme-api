@@ -15,9 +15,9 @@ import java.util.Date;
 @EqualsAndHashCode
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
-    /* You cannot create an instance directly from an abstract class.
-      Abstract classes are usually designed as a base class for subclasses and contain common behaviors.
-      Subclasses extend the abstract class and create concrete classes by implementing abstract methods. */
+/* You cannot create an instance directly from an abstract class.
+  Abstract classes are usually designed as a base class for subclasses and contain common behaviors.
+  Subclasses extend the abstract class and create concrete classes by implementing abstract methods. */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

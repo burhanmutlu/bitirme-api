@@ -1,10 +1,16 @@
 package com.burhanmutlu.ws.controller;
 
+import com.burhanmutlu.ws.dto.LoginRequest;
+import com.burhanmutlu.ws.dto.RegistrationRequest;
 import com.burhanmutlu.ws.entity.User;
+import com.burhanmutlu.ws.exception.UserExceptionHandler;
 import com.burhanmutlu.ws.service.UserService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.AuthenticationException;
 import java.util.List;
 
 @RestController
@@ -18,34 +24,15 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/v1/users")
-    public void createUser(@RequestBody User user) {
-        userService.createUser(user);
+    @PostMapping("/v1/register")
+    public ResponseEntity<Boolean> register(@RequestBody RegistrationRequest registrationRequest) {
+        Boolean response = userService.createUser(registrationRequest);
+        return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/v1/users")
-    public void updateUser(@RequestBody User user) {
-        userService.createUser(user);
-    }
+    @PostMapping("/v1/login")
+    public void login(@RequestBody LoginRequest loginRequest) {
 
-    @DeleteMapping("/v1/users/{userId}")
-    public void deleteUser(@PathVariable Long userId) {
-        userService.deleteUserById(userId);
-    }
-
-    @GetMapping("/v1/users")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
-    }
-
-    @RequestMapping(value = "/v1/users/{name}", method = RequestMethod.GET)
-    public List<User> getUsersByName(@PathVariable String name) {
-        return userService.getUsersByName(name);
-    }
-
-    @GetMapping("/v1/user/{userId}")
-    public User getUserById(@PathVariable Long userId) {
-        return  userService.getUserById(userId);
     }
 
 }
