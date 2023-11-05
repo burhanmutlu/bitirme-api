@@ -3,7 +3,10 @@ package com.burhanmutlu.ws.controller;
 import com.burhanmutlu.ws.dto.LoginRequest;
 import com.burhanmutlu.ws.dto.RegistrationRequest;
 import com.burhanmutlu.ws.entity.User;
+<<<<<<< HEAD
 import com.burhanmutlu.ws.exception.UserExceptionHandler;
+=======
+>>>>>>> 1d9b436d83a84bcb57f070a08b6ee70a5fb85d6c
 import com.burhanmutlu.ws.service.UserService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
