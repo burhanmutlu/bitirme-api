@@ -15,10 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service // This way autowired works
-<<<<<<< HEAD
 @NoArgsConstructor
-=======
->>>>>>> 1d9b436d83a84bcb57f070a08b6ee70a5fb85d6c
 public class UserServiceImpl implements UserService{
 
     private UserRepository userRepository;
