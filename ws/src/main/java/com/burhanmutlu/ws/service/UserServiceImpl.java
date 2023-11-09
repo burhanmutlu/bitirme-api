@@ -4,24 +4,19 @@ import com.burhanmutlu.ws.dto.RegistrationRequest;
 import com.burhanmutlu.ws.entity.User;
 import com.burhanmutlu.ws.exception.UserNotFoundException;
 import com.burhanmutlu.ws.repository.UserRepository;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service // This way autowired works
-@NoArgsConstructor
-public class UserServiceImpl implements UserService{
-
-    private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
+//@Service // This way autowired works
+@Component("UserServiceImpl")
+public class UserServiceImpl implements UserService {
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
-        passwordEncoder = new BCryptPasswordEncoder();
-        this.userRepository = userRepository;
-    }
+    private UserRepository userRepository;
+
+    private PasswordEncoder passwordEncoder;
 
     //TODO: Do not share any user information with anyone
 
@@ -48,10 +43,11 @@ public class UserServiceImpl implements UserService{
         }
     }
 
+
     @Override
     public User getUserByEmail(String email) {
 
-        User user = (User) userRepository.findByEmail(email);
+        User user = userRepository.findByEmail(email);
 
         if(user == null) {
             throw new UserNotFoundException("User email not found - " + email);
@@ -59,5 +55,4 @@ public class UserServiceImpl implements UserService{
 
         return user;
     }
-
 }

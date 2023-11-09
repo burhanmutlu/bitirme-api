@@ -1,35 +1,29 @@
 package com.burhanmutlu.ws.exception;
 
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@ControllerAdvice
+@RestControllerAdvice // Controller + responsebody
 public class UserExceptionHandler {
 
-    @ExceptionHandler
-    public ResponseEntity<ErrorResponse> handleException(UserNotFoundException exception) {
+    @ExceptionHandler({UserNotFoundException.class})
+    public ResponseEntity<ErrorResponse> handleException(Exception exception, HttpServletRequest request) {
 
         ErrorResponse errorResponse = new ErrorResponse();
 
+        errorResponse.setPath(request.getRequestURI());
         errorResponse.setStatus(HttpStatus.NOT_FOUND.value());
         errorResponse.setMessage(exception.getMessage());
         errorResponse.setTimeStamp(System.currentTimeMillis());
 
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-    }
+        if(exception instanceof UserNotFoundException) {
+            errorResponse.setStatus(HttpStatus.BAD_REQUEST.value());
+        }
 
-    @ExceptionHandler
-    public ResponseEntity<ErrorResponse> handleException(Exception e) {
-
-        ErrorResponse errorResponse = new ErrorResponse();
-
-        errorResponse.setStatus(HttpStatus.BAD_REQUEST.value());
-        errorResponse.setMessage(e.getMessage());
-        errorResponse.setTimeStamp(System.currentTimeMillis());
-
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(errorResponse.getStatus()).body(errorResponse);
     }
 
 

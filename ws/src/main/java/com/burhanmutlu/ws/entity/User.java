@@ -1,6 +1,7 @@
 package com.burhanmutlu.ws.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import lombok.*;
 
 @Entity
@@ -21,6 +22,7 @@ public class User extends BaseEntity {
     @Column(name = "email", unique = true, nullable = false, length = 60)
     private String email;
 
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
     @Column(name = "password")
     private String password;
 

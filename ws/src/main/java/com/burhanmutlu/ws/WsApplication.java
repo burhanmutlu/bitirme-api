@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
-@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
+@SpringBootApplication
 public class WsApplication {
 
 	private final static Logger logger = LogManager.getLogger(WsApplication.class);
