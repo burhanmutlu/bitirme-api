@@ -3,6 +3,7 @@ package com.burhanmutlu.ws.controller;
 import com.burhanmutlu.ws.dto.AuthResponse;
 import com.burhanmutlu.ws.dto.LoginRequest;
 import com.burhanmutlu.ws.dto.RegistrationRequest;
+import com.burhanmutlu.ws.entity.User;
 import com.burhanmutlu.ws.security.JwtTokenUtil;
 import com.burhanmutlu.ws.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +32,6 @@ public class UserController {
     @Autowired
     UserDetailsService userDetailsService;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
     @PostMapping("/v1/register")
     public ResponseEntity<Boolean> register(@RequestBody RegistrationRequest registrationRequest) {
         Boolean response = userService.createUser(registrationRequest);
@@ -42,16 +40,15 @@ public class UserController {
 
     @PostMapping("/v1/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) throws AuthenticationException {
-        //User user = userService.getUserByEmail(loginRequest.getEmail());
-        System.out.println("----"+passwordEncoder.encode("burhan"));
+        User user = userService.getUserByEmail(loginRequest.getEmail());
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(),
+                new UsernamePasswordAuthenticationToken(user.getEmail(),
                         loginRequest.getPassword()));
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new AuthResponse(token));
+        return ResponseEntity.ok(new AuthResponse(token, user.getEmail()));
     }
 
 
