@@ -30,6 +30,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtFilter jwtFilter;
 
+    private static final String[] AUTH_WHITELIST = {
+            "/api/v1/login",
+            "/api/v1/register",
+            "/swagger-resources/**",
+            "/swagger-ui/**",
+            "/swagger-ui",
+            "/v3/api-docs",
+    };
+
     @Override
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -43,9 +52,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http.cors().and().csrf().disable()
+                .headers().frameOptions().deny().and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/login", "/api/v1/register").permitAll()
+                .antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated().and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

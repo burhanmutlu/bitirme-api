@@ -13,7 +13,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -50,12 +49,5 @@ public class UserController {
         final String token = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new AuthResponse(token, user.getEmail()));
     }
-
-    @GetMapping("/hello")
-    public String hello() {
-        return "hello";
-    }
-
-
 
 }
