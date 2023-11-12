@@ -51,6 +51,11 @@ public class UserController {
         return ResponseEntity.ok(new AuthResponse(token, user.getEmail()));
     }
 
+    @GetMapping("/hello")
+    public String hello() {
+        return "hello";
+    }
+
 
 
 }

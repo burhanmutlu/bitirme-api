@@ -4,21 +4,23 @@ import com.burhanmutlu.ws.dto.RegistrationRequest;
 import com.burhanmutlu.ws.entity.User;
 import com.burhanmutlu.ws.exception.UserNotFoundException;
 import com.burhanmutlu.ws.repository.UserRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-//@Service // This way autowired works
-@Component("UserServiceImpl")
+
+@Service // This way autowired works
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    //TODO: Do not share any user information with anyone
+    private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
     /**
      * Creates a new user
@@ -36,9 +38,11 @@ public class UserServiceImpl implements UserService {
                     .phoneNumber(registrationRequest.getPhoneNumber())
                     .build();
             userRepository.save(user);
+            logger.info("created user-email: " + user.getEmail());
             return true;
         } catch (Exception exception) {
             exception.printStackTrace();
+            logger.error("dont created user- " + exception.getMessage());
             return false;
         }
     }
