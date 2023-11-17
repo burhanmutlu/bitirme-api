@@ -1,6 +1,7 @@
 package com.burhanmutlu.ws.controller;
 
 import com.burhanmutlu.ws.dto.AuthResponse;
+import com.burhanmutlu.ws.dto.GenericResponse;
 import com.burhanmutlu.ws.dto.LoginRequest;
 import com.burhanmutlu.ws.dto.RegistrationRequest;
 import com.burhanmutlu.ws.entity.User;
@@ -36,9 +37,9 @@ public class UserController {
     UserDetailsService userDetailsService;
 
     @PostMapping("/v1/register")
-    public ResponseEntity<Boolean> register(@Valid @RequestBody RegistrationRequest registrationRequest) {
+    public ResponseEntity<GenericResponse> register(@Valid @RequestBody RegistrationRequest registrationRequest) {
         Boolean response = userService.createUser(registrationRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.ok(new GenericResponse(response));
     }
 
     @PostMapping("/v1/login")

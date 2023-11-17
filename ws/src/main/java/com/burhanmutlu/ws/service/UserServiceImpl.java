@@ -2,6 +2,7 @@ package com.burhanmutlu.ws.service;
 
 import com.burhanmutlu.ws.dto.RegistrationRequest;
 import com.burhanmutlu.ws.entity.User;
+import com.burhanmutlu.ws.exception.UserExceptionHandler;
 import com.burhanmutlu.ws.exception.UserNotFoundException;
 import com.burhanmutlu.ws.repository.UserRepository;
 import org.apache.logging.log4j.LogManager;
@@ -29,7 +30,7 @@ public class UserServiceImpl implements UserService {
      * @return Returned new user
      */
     @Override
-    public Boolean createUser(RegistrationRequest registrationRequest) {
+    public Boolean createUser(RegistrationRequest registrationRequest){
         try {
             User user = User.builder()
                     .name(registrationRequest.getName())
@@ -42,9 +43,8 @@ public class UserServiceImpl implements UserService {
             log.info("created user-email: " + user.getEmail());
             return true;
         } catch (Exception exception) {
-            exception.printStackTrace();
             log.error("dont created user- " + exception.getMessage());
-            return false;
+            throw new RuntimeException(exception.getMessage());
         }
     }
 
