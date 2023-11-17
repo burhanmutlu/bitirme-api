@@ -7,6 +7,7 @@ import com.burhanmutlu.ws.entity.User;
 import com.burhanmutlu.ws.security.JwtTokenUtil;
 import com.burhanmutlu.ws.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,7 +16,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class UserController {
 
@@ -32,13 +36,13 @@ public class UserController {
     UserDetailsService userDetailsService;
 
     @PostMapping("/v1/register")
-    public ResponseEntity<Boolean> register(@RequestBody RegistrationRequest registrationRequest) {
+    public ResponseEntity<Boolean> register(@Valid @RequestBody RegistrationRequest registrationRequest) {
         Boolean response = userService.createUser(registrationRequest);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PostMapping("/v1/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) throws AuthenticationException {
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest loginRequest) throws AuthenticationException {
         User user = userService.getUserByEmail(loginRequest.getEmail());
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getEmail(),

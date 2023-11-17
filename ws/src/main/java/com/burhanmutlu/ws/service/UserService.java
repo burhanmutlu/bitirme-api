@@ -2,6 +2,7 @@ package com.burhanmutlu.ws.service;
 
 import com.burhanmutlu.ws.dto.RegistrationRequest;
 import com.burhanmutlu.ws.entity.User;
+import org.springframework.http.ResponseEntity;
 
 public interface UserService {
 
