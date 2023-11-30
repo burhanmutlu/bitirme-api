@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GenericResponse {
     private Boolean status;
+    private String message;
 }

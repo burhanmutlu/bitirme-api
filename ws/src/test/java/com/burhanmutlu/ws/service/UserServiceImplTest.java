@@ -33,11 +33,11 @@ class UserServiceImplTest {
 
         User user = User.builder().email("burhan@mail.com").build();
 
-        when(userRepository.findByEmail(user.getEmail())).thenReturn(List.of(user));
+        when(userRepository.findByEmail(user.getEmail())).thenReturn((User) List.of(user));
 
         List<User> user1 = (List<User>) userRepository.findByEmail(user.getEmail());
 
-        assertEquals("burhan@mail.com", List.of(user));
+        assertEquals("burhaggn@mail.com", List.of(user));
 
     }
 }

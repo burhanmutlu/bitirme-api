@@ -8,6 +8,7 @@ import com.burhanmutlu.ws.entity.User;
 import com.burhanmutlu.ws.security.JwtTokenUtil;
 import com.burhanmutlu.ws.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,7 +40,11 @@ public class UserController {
     @PostMapping("/v1/register")
     public ResponseEntity<GenericResponse> register(@Valid @RequestBody RegistrationRequest registrationRequest) {
         Boolean response = userService.createUser(registrationRequest);
-        return ResponseEntity.ok(new GenericResponse(response));
+        //String message = (response == true) ? "{register.success.message}" : "{register.error.message}";
+        // TODO: yabanci dil destegi
+        String message = (response == true) ? "başarılı" : "kullanıcı oluşmadı";
+
+        return ResponseEntity.ok(new GenericResponse(response, message));
     }
 
     @PostMapping("/v1/login")
