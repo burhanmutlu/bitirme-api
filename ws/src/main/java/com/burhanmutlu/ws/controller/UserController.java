@@ -1,15 +1,13 @@
 package com.burhanmutlu.ws.controller;
 
-import com.burhanmutlu.ws.dto.AuthResponse;
-import com.burhanmutlu.ws.dto.GenericResponse;
-import com.burhanmutlu.ws.dto.LoginRequest;
-import com.burhanmutlu.ws.dto.RegistrationRequest;
+import com.burhanmutlu.ws.dto.resp.AuthResponse;
+import com.burhanmutlu.ws.dto.resp.GenericResponse;
+import com.burhanmutlu.ws.dto.req.LoginRequest;
+import com.burhanmutlu.ws.dto.req.RegistrationRequest;
 import com.burhanmutlu.ws.entity.User;
 import com.burhanmutlu.ws.security.JwtTokenUtil;
 import com.burhanmutlu.ws.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

@@ -20,17 +20,6 @@ public abstract class BaseEntity implements Serializable {
   Abstract classes are usually designed as a base class for subclasses and contain common behaviors.
   Subclasses extend the abstract class and create concrete classes by implementing abstract methods. */
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false)
-    private Long id;
-
-    @Column(name = "created_by", updatable = false)
-    private String createdBy;
-
-    @Column(name = "updated_by")
-    private String updatedBy;
-
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", updatable = false)

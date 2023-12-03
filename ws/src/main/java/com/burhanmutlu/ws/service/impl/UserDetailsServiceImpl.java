@@ -1,4 +1,4 @@
-package com.burhanmutlu.ws.service;
+package com.burhanmutlu.ws.service.impl;
 
 import com.burhanmutlu.ws.entity.User;
 import com.burhanmutlu.ws.exception.UserNotFoundException;

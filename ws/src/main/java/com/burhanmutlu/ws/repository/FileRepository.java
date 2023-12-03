@@ -1,12 +1,9 @@
 package com.burhanmutlu.ws.repository;
 
-import com.burhanmutlu.ws.entity.User;
+import com.burhanmutlu.ws.entity.File;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-
-    User findByEmail(String email);
-
+public interface FileRepository extends JpaRepository<File, Long> {
 }

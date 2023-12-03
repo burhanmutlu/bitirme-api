@@ -1,6 +1,6 @@
 package com.burhanmutlu.ws.security;
 
-import com.burhanmutlu.ws.service.UserDetailsServiceImpl;
+import com.burhanmutlu.ws.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

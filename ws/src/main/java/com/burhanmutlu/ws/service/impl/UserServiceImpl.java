@@ -1,10 +1,10 @@
-package com.burhanmutlu.ws.service;
+package com.burhanmutlu.ws.service.impl;
 
-import com.burhanmutlu.ws.dto.RegistrationRequest;
+import com.burhanmutlu.ws.dto.req.RegistrationRequest;
 import com.burhanmutlu.ws.entity.User;
-import com.burhanmutlu.ws.exception.UserExceptionHandler;
 import com.burhanmutlu.ws.exception.UserNotFoundException;
 import com.burhanmutlu.ws.repository.UserRepository;
+import com.burhanmutlu.ws.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +15,13 @@ import org.springframework.stereotype.Service;
 @Service // This way autowired works
 public class UserServiceImpl implements UserService {
 
+    private static final Logger log = LogManager.getLogger(UserServiceImpl.class);
+
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-    private static final Logger log = LogManager.getLogger(UserServiceImpl.class);
 
     /**
      * Creates a new user

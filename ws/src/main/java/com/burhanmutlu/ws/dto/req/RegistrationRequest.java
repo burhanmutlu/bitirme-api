@@ -1,4 +1,4 @@
-package com.burhanmutlu.ws.dto;
+package com.burhanmutlu.ws.dto.req;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

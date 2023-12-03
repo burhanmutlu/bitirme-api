@@ -13,6 +13,11 @@ import lombok.*;
 @Table(name = "users")
 public class User extends BaseEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false)
+    private Long id;
+
     @Column(name = "name", length = 30)
     private String name;
 

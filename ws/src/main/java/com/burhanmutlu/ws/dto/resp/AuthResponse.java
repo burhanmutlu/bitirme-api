@@ -1,4 +1,4 @@
-package com.burhanmutlu.ws.dto;
+package com.burhanmutlu.ws.dto.resp;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
