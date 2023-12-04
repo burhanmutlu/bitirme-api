@@ -10,16 +10,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "passwords")
-public class Password extends BaseEntity {
+@Table(name = "logins")
+public class Logins extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
     private Long id;
-
-    @Column(name = "account_name")
-    private String accountName;
 
     @Column(name = "username")
     private String username;
@@ -27,11 +24,11 @@ public class Password extends BaseEntity {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "website_url")
-    private String websiteUrl;
-
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User userId;
 
+    @ManyToOne
+    @JoinColumn(name = "company_id", nullable = false)
+    private Company companyId;
 }

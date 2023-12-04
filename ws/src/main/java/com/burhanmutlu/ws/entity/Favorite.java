@@ -1,19 +1,11 @@
 package com.burhanmutlu.ws.entity;
 
-import lombok.*;
-
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Table(name = "favorites")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "favorite_type", discriminatorType = DiscriminatorType.STRING)
 public class Favorite extends BaseEntity {
+    //Concidanteyi  column kullanılabilir ama bence saçma
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,5 +15,13 @@ public class Favorite extends BaseEntity {
     @ManyToOne // her dosya sadece bir kullanıcıya özel o yüzden böyle.
     @JoinColumn(name = "user_id", nullable = false)
     private User userId;
+
+    @ManyToOne
+    @JoinColumn(name = "file_id", nullable = false)
+    private File fileId;
+
+    @ManyToOne
+    @JoinColumn(name = "logins_id", nullable = false)
+    private Logins loginsId;
 
 }
