@@ -8,6 +8,7 @@ import com.burhanmutlu.ws.entity.User;
 import com.burhanmutlu.ws.security.JwtTokenUtil;
 import com.burhanmutlu.ws.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,7 +21,7 @@ import javax.validation.Valid;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class UserController {
 
     @Autowired
@@ -35,7 +36,7 @@ public class UserController {
     @Autowired
     UserDetailsService userDetailsService;
 
-    @PostMapping("/v1/register")
+    @PostMapping("/register")
     public ResponseEntity<GenericResponse> register(@Valid @RequestBody RegistrationRequest registrationRequest) {
         Boolean response = userService.createUser(registrationRequest);
         //String message = (response == true) ? "{register.success.message}" : "{register.error.message}";
@@ -45,7 +46,7 @@ public class UserController {
         return ResponseEntity.ok(new GenericResponse(response, message));
     }
 
-    @PostMapping("/v1/login")
+    @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest loginRequest) throws AuthenticationException {
         User user = userService.getUserByEmail(loginRequest.getEmail());
         authenticationManager.authenticate(

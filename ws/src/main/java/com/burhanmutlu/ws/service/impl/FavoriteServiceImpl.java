@@ -16,5 +16,28 @@ public class FavoriteServiceImpl implements FavoriteService {
     private static final Logger log = LogManager.getLogger(FavoriteServiceImpl.class);
 
 
+    @Override
+    public List<Favorite> getFavoritesByUser(User user) {
+        return null;
+    }
 
+    @Override
+    public Favorite getFavoriteById(Long id) {
+        return null;
+    }
+
+    @Override
+    public Favorite addFileToFavorite(Long userId, Long fileId) {
+        return null;
+    }
+
+    @Override
+    public Favorite addLoginsToFavorite(Long userId, Long loginsId) {
+        return null;
+    }
+
+    @Override
+    public void deleteFavorite(Long id) {
+
+    }
 }

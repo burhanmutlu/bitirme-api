@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice // Controller + responsebody
 public class UserExceptionHandler {
 
-    @ExceptionHandler({UserNotFoundException.class})
+    @ExceptionHandler({
+            UserNotFoundException.class,
+            CompanyNotFoundException.class,
+            NullPointerException.class
+    })
     public ResponseEntity<ErrorResponse> handleException(Exception exception, HttpServletRequest request) {
 
         ErrorResponse errorResponse = new ErrorResponse();
@@ -20,6 +24,12 @@ public class UserExceptionHandler {
         errorResponse.setTimeStamp(System.currentTimeMillis());
 
         if(exception instanceof UserNotFoundException) {
+            errorResponse.setStatus(HttpStatus.BAD_REQUEST.value());
+        } else if (exception instanceof Exception) {
+            errorResponse.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        } else if (exception instanceof CompanyNotFoundException) {
+            errorResponse.setStatus(HttpStatus.BAD_REQUEST.value());
+        } else if(exception instanceof NullPointerException) {
             errorResponse.setStatus(HttpStatus.BAD_REQUEST.value());
         }
 

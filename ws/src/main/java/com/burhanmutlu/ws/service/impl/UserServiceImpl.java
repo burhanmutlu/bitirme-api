@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean createUser(RegistrationRequest registrationRequest){
         try {
+            // TODO mapper kullan
             User user = User.builder()
                     .name(registrationRequest.getName())
                     .surname(registrationRequest.getSurname())
@@ -57,5 +58,15 @@ public class UserServiceImpl implements UserService {
         }
 
         return user;
+    }
+
+    @Override
+    public User updateUser(Long id, RegistrationRequest registrationRequest) {
+        return null;
+    }
+
+    @Override
+    public void deleteUser(Long userId) {
+
     }
 }

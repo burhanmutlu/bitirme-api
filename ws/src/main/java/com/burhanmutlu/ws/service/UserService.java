@@ -9,4 +9,8 @@ public interface UserService {
 
     public User getUserByEmail(String email);
 
+    public User updateUser(Long userId, RegistrationRequest registrationRequest);
+
+    public void deleteUser(Long userId);
+
 }
