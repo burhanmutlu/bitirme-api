@@ -1,0 +1,27 @@
+//return new ResponseEntity<>(company, HttpStatus.OK);
+//return ResponseEntity.status(200).body(company);
+
+/*
+Dto, yalnızca ürünDTO'su dışında daha fazla bilgi içerebilir.
+Response birden fazla DTO'nun toplamı olabilir. Ayrıca kimlik veya başka türde bilgiler gibi
+META bilgilerini de içerebilir. Belki bir başarı/başarısızlık kodu veya diğer işletme bilgilerini döndürecektir
+*/
+// @JsonProperty("company_logo") bunu baska bir yerden veri cekersek kullaniriz eslesme icin
+
+
+/* You cannot create an instance directly from an abstract class.
+Abstract classes are usually designed as a base class for subclasses and contain common behaviors.
+Subclasses extend the abstract class and create concrete classes by implementing abstract methods. */
+
+// 401 status code: Indicates that the request requires user authentication information.
+
+CompanyDto companyDto = modelMapper.map(company, CompanyDto.class);
+/*
+CompanyDto companyDto = CompanyDto.builder()
+    .companyName(company.getCompanyName())
+    .companyLogo(company.getCompanyLogo())
+    .companyWebPage(company.getCompanyWebPage()).build();
+    ikisi ayni sey. o yuzden ayni seyleri tekrar etmemek icin kullaniyoruz
+*/
+
+

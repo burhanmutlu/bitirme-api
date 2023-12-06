@@ -1,6 +1,6 @@
 package com.burhanmutlu.ws.repository;
 
-import com.burhanmutlu.ws.entity.CreditCard;
+import com.burhanmutlu.ws.model.CreditCard;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

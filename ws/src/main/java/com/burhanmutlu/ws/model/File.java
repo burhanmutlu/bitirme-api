@@ -1,4 +1,4 @@
-package com.burhanmutlu.ws.entity;
+package com.burhanmutlu.ws.model;
 
 import javax.persistence.*;
 import lombok.*;

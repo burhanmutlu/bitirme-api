@@ -1,12 +1,13 @@
 package com.burhanmutlu.ws.controller;
 
+import com.burhanmutlu.ws.dto.CompanyDto;
 import com.burhanmutlu.ws.dto.resp.GenericResponse;
-import com.burhanmutlu.ws.entity.Company;
 import com.burhanmutlu.ws.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -16,12 +17,16 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
+    @GetMapping("/companies/user/{userId}")
+    public ResponseEntity<List<CompanyDto>> getAllCompaniesByUserId(@PathVariable Long userId) {
+        List<CompanyDto> companyDtoList = companyService.getAllCompaniesByUserId(userId);
+        return ResponseEntity.ok(companyDtoList);
+    }
+
     @GetMapping("/companies/{companyId}")
-    public ResponseEntity<Company> getCompanyById(@PathVariable Long companyId) {
-        Company company = companyService.getCompanyById(companyId);
-        //return new ResponseEntity<>(company, HttpStatus.OK);
-        //return ResponseEntity.status(200).body(company);
-        return ResponseEntity.ok(company);
+    public ResponseEntity<CompanyDto> getCompanyById(@PathVariable Long companyId) {
+        CompanyDto companyDto = companyService.getCompanyById(companyId);
+        return ResponseEntity.ok(companyDto);
     }
 
     @DeleteMapping("/companies/{companyId}")

@@ -18,6 +18,5 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Se
                          AuthenticationException authException) throws IOException, ServletException {
 
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
-        // 401 status code: Indicates that the request requires user authentication information.
     }
 }

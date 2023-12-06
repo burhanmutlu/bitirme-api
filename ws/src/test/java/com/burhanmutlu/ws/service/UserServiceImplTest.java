@@ -1,6 +1,6 @@
 package com.burhanmutlu.ws.service;
 
-import com.burhanmutlu.ws.entity.User;
+import com.burhanmutlu.ws.model.User;
 import com.burhanmutlu.ws.repository.UserRepository;
 import com.burhanmutlu.ws.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,7 @@
 package com.burhanmutlu.ws.service.impl;
 
 import com.burhanmutlu.ws.dto.req.RegistrationRequest;
-import com.burhanmutlu.ws.entity.User;
+import com.burhanmutlu.ws.model.User;
 import com.burhanmutlu.ws.exception.UserNotFoundException;
 import com.burhanmutlu.ws.repository.UserRepository;
 import com.burhanmutlu.ws.service.UserService;
@@ -57,6 +57,16 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFoundException("User email not found - " + email);
         }
 
+        return user;
+    }
+
+    @Override
+    public User getUserById(Long id) {
+        User user = userRepository.findById(id).orElse(null);
+
+        if(user == null) {
+            throw new UserNotFoundException("User id not found - " + id);
+        }
         return user;
     }
 

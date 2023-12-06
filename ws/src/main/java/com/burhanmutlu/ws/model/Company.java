@@ -1,4 +1,4 @@
-package com.burhanmutlu.ws.entity;
+package com.burhanmutlu.ws.model;
 
 import lombok.*;
 
@@ -26,5 +26,9 @@ public class Company extends BaseEntity {
 
     @Column(name = "company_web_page")
     private String companyWebPage;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User userId;
 
 }

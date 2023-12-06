@@ -1,9 +1,7 @@
 package com.burhanmutlu.ws.service;
 
-import com.burhanmutlu.ws.entity.Favorite;
-import com.burhanmutlu.ws.entity.File;
-import com.burhanmutlu.ws.entity.Logins;
-import com.burhanmutlu.ws.entity.User;
+import com.burhanmutlu.ws.model.Favorite;
+import com.burhanmutlu.ws.model.User;
 
 import java.util.List;
 
