@@ -1,18 +1,18 @@
 package com.burhanmutlu.ws.service;
 
 import com.burhanmutlu.ws.dto.req.RegistrationRequest;
-import com.burhanmutlu.ws.model.User;
+import com.burhanmutlu.ws.entity.User;
 
 public interface UserService {
 
-    public Boolean createUser(RegistrationRequest registrationRequestDto);
+    Boolean createUser(RegistrationRequest registrationRequestDto);
 
-    public User getUserByEmail(String email);
+    User getUserByEmail(String email);
 
-    public User getUserById(Long id);
+    User getUserById(Long id);
 
-    public User updateUser(Long userId, RegistrationRequest registrationRequest);
+    User updateUser(Long userId, RegistrationRequest registrationRequest);
 
-    public void deleteUser(Long userId);
+    void deleteUser(Long userId);
 
 }

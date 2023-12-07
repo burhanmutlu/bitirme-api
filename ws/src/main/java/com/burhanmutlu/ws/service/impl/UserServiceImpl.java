@@ -1,7 +1,7 @@
 package com.burhanmutlu.ws.service.impl;
 
 import com.burhanmutlu.ws.dto.req.RegistrationRequest;
-import com.burhanmutlu.ws.model.User;
+import com.burhanmutlu.ws.entity.User;
 import com.burhanmutlu.ws.exception.UserNotFoundException;
 import com.burhanmutlu.ws.repository.UserRepository;
 import com.burhanmutlu.ws.service.UserService;

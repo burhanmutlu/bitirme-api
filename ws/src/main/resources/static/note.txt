@@ -24,4 +24,6 @@ CompanyDto companyDto = CompanyDto.builder()
     ikisi ayni sey. o yuzden ayni seyleri tekrar etmemek icin kullaniyoruz
 */
 
+PUT isteğinde bir entity’nin tüm alanları replace edilirken, PATCH isteğinde ise sadece gönderilen alan güncellenir.
+
 

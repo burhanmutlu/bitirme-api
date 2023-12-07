@@ -45,7 +45,7 @@ public class DataLoader implements CommandLineRunner {
                 .companyLogo(cL)
                 .companyWebPage(cW)
                 .build();
-        companyService.addCompanyById(companyRequest, Integer.toUnsignedLong(1));
+        companyService.addCompanyByUserId(companyRequest, Integer.toUnsignedLong(1));
     }
 
 }

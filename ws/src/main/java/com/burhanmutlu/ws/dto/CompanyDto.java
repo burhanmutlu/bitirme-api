@@ -15,5 +15,7 @@ public class CompanyDto {
 
     private String companyWebPage;
 
+    private Boolean updatable;
+
 
 }

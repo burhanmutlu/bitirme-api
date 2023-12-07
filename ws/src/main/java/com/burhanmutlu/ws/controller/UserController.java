@@ -4,7 +4,7 @@ import com.burhanmutlu.ws.dto.resp.AuthResponse;
 import com.burhanmutlu.ws.dto.resp.GenericResponse;
 import com.burhanmutlu.ws.dto.req.LoginRequest;
 import com.burhanmutlu.ws.dto.req.RegistrationRequest;
-import com.burhanmutlu.ws.model.User;
+import com.burhanmutlu.ws.entity.User;
 import com.burhanmutlu.ws.security.JwtTokenUtil;
 import com.burhanmutlu.ws.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

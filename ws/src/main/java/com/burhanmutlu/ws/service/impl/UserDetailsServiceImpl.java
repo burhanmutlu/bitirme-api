@@ -1,6 +1,6 @@
 package com.burhanmutlu.ws.service.impl;
 
-import com.burhanmutlu.ws.model.User;
+import com.burhanmutlu.ws.entity.User;
 import com.burhanmutlu.ws.exception.UserNotFoundException;
 import com.burhanmutlu.ws.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

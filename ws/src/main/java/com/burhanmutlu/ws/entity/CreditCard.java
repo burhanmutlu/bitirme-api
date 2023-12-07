@@ -1,4 +1,4 @@
-package com.burhanmutlu.ws.model;
+package com.burhanmutlu.ws.entity;
 
 import lombok.*;
 

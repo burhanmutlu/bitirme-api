@@ -1,7 +1,7 @@
 package com.burhanmutlu.ws.service.impl;
 
-import com.burhanmutlu.ws.model.Favorite;
-import com.burhanmutlu.ws.model.User;
+import com.burhanmutlu.ws.entity.Favorite;
+import com.burhanmutlu.ws.entity.User;
 import com.burhanmutlu.ws.service.FavoriteService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
