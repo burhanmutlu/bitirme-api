@@ -1,6 +1,6 @@
 package com.burhanmutlu.ws.service.impl;
 
-import com.burhanmutlu.ws.dto.CompanyDto;
+import com.burhanmutlu.ws.dto.resp.CompanyResponse;
 import com.burhanmutlu.ws.dto.req.CompanyRequest;
 import com.burhanmutlu.ws.entity.Company;
 import com.burhanmutlu.ws.exception.CompanyNotFoundException;
@@ -8,32 +8,31 @@ import com.burhanmutlu.ws.entity.User;
 import com.burhanmutlu.ws.repository.CompanyRepository;
 import com.burhanmutlu.ws.service.CompanyService;
 import com.burhanmutlu.ws.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
 
     private static final Logger log = LogManager.getLogger(CompanyServiceImpl.class);
 
-    @Autowired
-    private CompanyRepository companyRepository;
+    private final CompanyRepository companyRepository;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @Override
-    public List<CompanyDto> getAllCompaniesByUserId(Long id) {
+    public List<CompanyResponse> getAllCompaniesByUserId(Long id) {
         User user = userService.getUserById(id);
 
         List<Company> companies = companyRepository.findAllByUserId(id);
 
-        List<CompanyDto> companyDtoList = new ArrayList<>();
+        List<CompanyResponse> companyResponseList = new ArrayList<>();
         boolean updatable;
         for(Company company : companies) {
             updatable = true;
@@ -41,20 +40,20 @@ public class CompanyServiceImpl implements CompanyService {
             if(company.getUserId().getId() == 1) {
                 updatable = false;
             }
-            CompanyDto companyDto = CompanyDto.builder()
+            CompanyResponse companyResponse = CompanyResponse.builder()
                     .id(company.getId())
                     .companyName(company.getCompanyName())
                     .companyLogo(company.getCompanyLogo())
                     .companyWebPage(company.getCompanyWebPage())
                     .updatable(updatable)
                     .build();
-            companyDtoList.add(companyDto);
+            companyResponseList.add(companyResponse);
         }
-        return companyDtoList;
+        return companyResponseList;
     }
 
     @Override
-    public CompanyDto getCompanyById(Long id) {
+    public CompanyResponse getCompanyById(Long id) {
         Company company = companyRepository.findById(id).orElseThrow(
                 () -> { throw new CompanyNotFoundException("Company not found"); });
         boolean updatable = true;
@@ -62,18 +61,18 @@ public class CompanyServiceImpl implements CompanyService {
             updatable = false;
         }
 
-        CompanyDto companyDto = CompanyDto.builder()
+        CompanyResponse companyResponse = CompanyResponse.builder()
                 .id(company.getId())
                 .companyName(company.getCompanyName())
                 .companyLogo(company.getCompanyLogo())
                 .updatable(updatable)
                 .companyWebPage(company.getCompanyWebPage()).build();
 
-        return companyDto;
+        return companyResponse;
     }
 
     @Override
-    public CompanyDto addCompanyByUserId(CompanyRequest request, Long userId) {
+    public CompanyResponse addCompanyByUserId(CompanyRequest request, Long userId) {
 
         User user = userService.getUserById(userId);
 
@@ -86,7 +85,7 @@ public class CompanyServiceImpl implements CompanyService {
 
         company = companyRepository.save(company);
 
-        CompanyDto companyDto = CompanyDto.builder()
+        CompanyResponse companyResponse = CompanyResponse.builder()
                 .companyName(company.getCompanyName())
                 .companyWebPage(company.getCompanyWebPage())
                 .companyLogo(company.getCompanyLogo())
@@ -94,11 +93,11 @@ public class CompanyServiceImpl implements CompanyService {
                 .updatable(true)
                 .build();
 
-        return companyDto;
+        return companyResponse;
     }
 
     @Override
-    public CompanyDto updateCompany(CompanyRequest companyRequest, Long id) {
+    public CompanyResponse updateCompany(CompanyRequest companyRequest, Long id) {
         Company company = companyRepository.findById(id).orElseThrow(
                 () -> { throw new CompanyNotFoundException("company not found"); });
 
@@ -115,7 +114,7 @@ public class CompanyServiceImpl implements CompanyService {
 
         companyRepository.save(company);
 
-        CompanyDto companyDto = CompanyDto.builder()
+        CompanyResponse companyResponse = CompanyResponse.builder()
                 .id(company.getId())
                 .companyName(company.getCompanyName())
                 .companyLogo(company.getCompanyLogo())
@@ -123,7 +122,7 @@ public class CompanyServiceImpl implements CompanyService {
                 .updatable(true)
                 .build();
 
-        return companyDto;
+        return companyResponse;
     }
 
     @Override

@@ -1,7 +1,9 @@
 package com.burhanmutlu.ws.entity;
 
-import javax.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -13,30 +15,22 @@ import lombok.*;
 public class File extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "uuid2")
+    private String id;
 
     @Column(name = "file_name")
     private String fileName;
 
-    @Column(name = "created_by", updatable = false)
-    private String createdBy;
+    @Column(name = "type")
+    private String type;
 
-    @Column(name = "updated_by")
-    private String updatedBy;
-
-    @Column(name = "file_size")
-    private Double fileSize;
-
-    @Column(name = "file_extention")
-    private String fileExtention;
-
-    @Column(name = "file_url_path")
-    private String fileUrlPath;
+    @Lob
+    private byte[] data;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, updatable = false)
     private User userId;
 
 }

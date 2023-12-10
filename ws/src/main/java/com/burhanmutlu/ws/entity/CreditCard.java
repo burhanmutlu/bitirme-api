@@ -18,6 +18,9 @@ public class CreditCard extends BaseEntity {
     @Column(name = "id", updatable = false)
     private Long id;
 
+    @Column(name = "card_name")
+    private String cardName;
+
     @Column(name = "card_number")
     private String cardNumber;
 
@@ -29,5 +32,9 @@ public class CreditCard extends BaseEntity {
 
     @Column(name = "cvv")
     private String cvv;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false, updatable = false)
+    private User userId;
 
 }

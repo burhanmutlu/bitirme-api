@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface LoginsService {
 
-    List<LoginsResponse> getAllLoginsByUserId(Long id);
+    List<LoginsResponse> getAllLoginsByUserId(Long id, int page, int size, String sortBy, String sortOrder);
 
     LoginsResponse getLoginsById(Long id);
 
     LoginsResponse addLoginsByUserId(Long id, LoginsRequest loginsRequest);
 
-    LoginsService updateLogins(Long id, LoginRequest loginRequest);
+    LoginsResponse updateLogins(Long id, LoginsRequest loginsRequest);
 
     void deleteLogins(Long id);
 

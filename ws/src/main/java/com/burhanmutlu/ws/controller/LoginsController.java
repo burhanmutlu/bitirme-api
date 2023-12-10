@@ -2,8 +2,10 @@ package com.burhanmutlu.ws.controller;
 
 import com.burhanmutlu.ws.dto.req.LoginRequest;
 import com.burhanmutlu.ws.dto.req.LoginsRequest;
+import com.burhanmutlu.ws.dto.resp.GenericResponse;
 import com.burhanmutlu.ws.dto.resp.LoginsResponse;
 import com.burhanmutlu.ws.service.LoginsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,15 +14,22 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@RequiredArgsConstructor
 @RequestMapping("/api/v1")
 public class LoginsController {
 
-    @Autowired
-    private LoginsService loginsService;
+    private final LoginsService loginsService;
 
     @GetMapping("/logins/user/{userId}")
-    public ResponseEntity<List<LoginsResponse>> getAllLoginsByUserId(@PathVariable  Long userId) {
-        List<LoginsResponse> loginsResponseList = loginsService.getAllLoginsByUserId(userId);
+    public ResponseEntity<List<LoginsResponse>> getAllLoginsByUserId (
+                                                 @PathVariable  Long userId,
+                                                 @RequestParam(defaultValue = "0") int page,
+                                                 @RequestParam(defaultValue = "10") int size,
+                                                 @RequestParam(defaultValue = "id") String sortBy,
+                                                 @RequestParam(defaultValue = "asc") String sortOrder) {
+
+        List<LoginsResponse> loginsResponseList =
+                loginsService.getAllLoginsByUserId(userId, page, size, sortBy, sortOrder);
         return ResponseEntity.ok(loginsResponseList);
     }
 
@@ -37,5 +46,17 @@ public class LoginsController {
         return ResponseEntity.ok(loginsResponse);
     }
 
+    @PutMapping("/logins/{id}")
+    public ResponseEntity<LoginsResponse> updateLoginsById(@PathVariable Long id,
+                                                           @RequestBody LoginsRequest loginsRequest) {
+        LoginsResponse loginsResponse = loginsService.updateLogins(id, loginsRequest);
+        return ResponseEntity.ok(loginsResponse);
+    }
+
+    @DeleteMapping("/logins/{id}")
+    public ResponseEntity<?> deleteLoginsById(@PathVariable Long id) {
+        loginsService.deleteLogins(id);
+        return ResponseEntity.ok(new GenericResponse(true, "logins is deleted"));
+    }
 
 }

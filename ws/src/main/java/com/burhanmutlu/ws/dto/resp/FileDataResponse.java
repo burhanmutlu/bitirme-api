@@ -5,14 +5,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Lob;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LoginsResponse {
-    private Long id;
-    private String username;
-    private String password;
-    private CompanyResponse companyData;
+public class FileDataResponse {
+    
+    private String fileName;
+
+    @Lob
+    private byte[] data;
 
 }

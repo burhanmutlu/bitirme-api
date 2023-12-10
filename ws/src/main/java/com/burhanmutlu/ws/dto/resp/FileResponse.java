@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LoginsResponse {
-    private Long id;
-    private String username;
-    private String password;
-    private CompanyResponse companyData;
-
+public class FileResponse {
+    private String name;
+    private String url;
+    private String type;
+    private String size;
 }

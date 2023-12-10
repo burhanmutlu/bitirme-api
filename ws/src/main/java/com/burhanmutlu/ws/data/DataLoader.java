@@ -11,11 +11,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataLoader implements CommandLineRunner {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    private final CompanyService companyService;
 
     @Autowired
-    private CompanyService companyService;
+    public DataLoader(UserService userService, CompanyService companyService) {
+        this.userService = userService;
+        this.companyService = companyService;
+    }
 
     @Override
     public void run(String... args) throws Exception {

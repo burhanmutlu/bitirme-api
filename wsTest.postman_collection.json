@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "4021f5a1-9c2d-476e-8194-e9d92c77e5bb",
 		"name": "wsTest",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "25180275"
 	},
 	"item": [
@@ -29,19 +29,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8081/api/v1/register",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"v1",
-								"register"
-							]
-						}
+						"url": "http://localhost:8081/api/v1/register"
 					},
 					"response": []
 				},
@@ -60,6 +48,9 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -78,21 +69,32 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8081/api/v1/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"v1",
-								"login"
-							]
-						}
+						"url": "http://localhost:8081/api/v1/login"
 					},
 					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -104,30 +106,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{token}}"
+							}
 						},
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8081/api/v1/companies/6",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"v1",
-								"companies",
-								"6"
-							]
-						}
+						"url": "http://localhost:8081/api/v1/companies/6"
 					},
 					"response": []
 				},
@@ -136,31 +121,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{token}}"
+							}
 						},
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8081/api/v1/companies/user/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"v1",
-								"companies",
-								"user",
-								"2"
-							]
-						}
+						"url": "http://localhost:8081/api/v1/companies/user/1"
 					},
 					"response": []
 				},
@@ -169,13 +136,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{token}}"
+							}
 						},
 						"method": "PUT",
 						"header": [],
@@ -188,20 +151,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8081/api/v1/companies/10",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"v1",
-								"companies",
-								"10"
-							]
-						}
+						"url": "http://localhost:8081/api/v1/companies/10"
 					},
 					"response": []
 				},
@@ -210,30 +160,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{token}}"
+							}
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8081/api/v1/companies/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"v1",
-								"companies",
-								"1"
-							]
-						}
+						"url": "http://localhost:8081/api/v1/companies/1"
 					},
 					"response": []
 				},
@@ -242,13 +175,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{token}}"
+							}
 						},
 						"method": "POST",
 						"header": [],
@@ -261,21 +190,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8081/api/v1/companies/user/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"v1",
-								"companies",
-								"user",
-								"1"
-							]
-						}
+						"url": "http://localhost:8081/api/v1/companies/user/1"
 					},
 					"response": []
 				}
@@ -285,22 +200,18 @@
 			"name": "logins",
 			"item": [
 				{
-					"name": "getAllByUserId",
+					"name": "getAllByUserIdAndSortAndPageable",
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{token}}"
+							}
 						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/api/v1/logins/user/1",
+							"raw": "http://localhost:8081/api/v1/logins/user/1?page=0&size=10&sortBy=id&sortOrder=desc",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -312,6 +223,24 @@
 								"logins",
 								"user",
 								"1"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "sortBy",
+									"value": "id"
+								},
+								{
+									"key": "sortOrder",
+									"value": "desc"
+								}
 							]
 						}
 					},
@@ -322,30 +251,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{token}}"
+							}
 						},
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8081/api/v1/logins/6",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"v1",
-								"logins",
-								"6"
-							]
-						}
+						"url": "http://localhost:8081/api/v1/logins/6"
 					},
 					"response": []
 				},
@@ -354,13 +266,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{token}}"
+							}
 						},
 						"method": "POST",
 						"header": [],
@@ -373,25 +281,184 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8081/api/v1/logins/user/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"v1",
-								"logins",
-								"user",
-								"1"
-							]
-						}
+						"url": "http://localhost:8081/api/v1/logins/user/1"
+					},
+					"response": []
+				},
+				{
+					"name": "updateById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"companyId\": 5,\r\n    \"username\": \"yeninin daha yenisi\",\r\n    \"password\": \"2134\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/api/v1/logins/1"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8081/api/v1/logins/3"
 					},
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "favorite",
+			"item": [
+				{
+					"name": "addLoginsByUserId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"favoriteId\": 1589789785789789797\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/api/v1/favorites/logins/user/1"
+					},
+					"response": []
+				},
+				{
+					"name": "addFileByUserId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"favoriteId\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/api/v1/favorites/files/user/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "file",
+			"item": [
+				{
+					"name": "addFileByUserId",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Burhan Mutlu/Desktop/registration.txt"
+								}
+							]
+						},
+						"url": "http://localhost:8081/api/v1/files/user/1"
+					},
+					"response": []
+				},
+				{
+					"name": "getAllFilesByUserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8081/api/v1/files/user/1"
+					},
+					"response": []
+				},
+				{
+					"name": "getFileById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8081/api/v1/files/bd045d81-0a16-4470-8650-3ad8034f3e64"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteFileById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8081/api/v1/files/bd045d81-0a16-4470-8650-3ad8034f3e64"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "creditCard",
+			"item": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "{{token}}"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"variable": [

@@ -15,9 +15,9 @@ Subclasses extend the abstract class and create concrete classes by implementing
 
 // 401 status code: Indicates that the request requires user authentication information.
 
-CompanyDto companyDto = modelMapper.map(company, CompanyDto.class);
+CompanyDto companyResponse = modelMapper.map(company, CompanyDto.class);
 /*
-CompanyDto companyDto = CompanyDto.builder()
+CompanyDto companyResponse = CompanyDto.builder()
     .companyName(company.getCompanyName())
     .companyLogo(company.getCompanyLogo())
     .companyWebPage(company.getCompanyWebPage()).build();
@@ -25,5 +25,9 @@ CompanyDto companyDto = CompanyDto.builder()
 */
 
 PUT isteğinde bir entity’nin tüm alanları replace edilirken, PATCH isteğinde ise sadece gönderilen alan güncellenir.
+
+iş yapan sınıfları beane taşıyabilirsin. ancak sürekli değer atamak için kullanılan şeyler sürekli farklı
+değerlere sahip olacağı için onları yeni nesne oluşturarak yaparsın. şöyle düşün 100 kişi aynı anda servis sınıfını
+kullanabilir. çünkü bu iş yapıyor. ancak herkes fileresponse nesnesini kullanamaz.
 
 

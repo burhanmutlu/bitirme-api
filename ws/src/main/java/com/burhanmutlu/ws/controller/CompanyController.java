@@ -1,10 +1,10 @@
 package com.burhanmutlu.ws.controller;
 
-import com.burhanmutlu.ws.dto.CompanyDto;
+import com.burhanmutlu.ws.dto.resp.CompanyResponse;
 import com.burhanmutlu.ws.dto.req.CompanyRequest;
 import com.burhanmutlu.ws.dto.resp.GenericResponse;
 import com.burhanmutlu.ws.service.CompanyService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,35 +12,36 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@RequiredArgsConstructor
 @RequestMapping("/api/v1")
 public class CompanyController {
 
-    @Autowired
-    private CompanyService companyService;
+    private final CompanyService companyService;
 
     @GetMapping("/companies/user/{userId}")
-    public ResponseEntity<List<CompanyDto>> getAllCompaniesByUserId(@PathVariable Long userId) {
-        List<CompanyDto> companyDtoList = companyService.getAllCompaniesByUserId(userId);
-        return ResponseEntity.ok(companyDtoList);
+    public ResponseEntity<List<CompanyResponse>> getAllCompaniesByUserId(@PathVariable Long userId) {
+        List<CompanyResponse> companyResponseList = companyService.getAllCompaniesByUserId(userId);
+        return ResponseEntity.ok(companyResponseList);
     }
 
     @GetMapping("/companies/{companyId}")
-    public ResponseEntity<CompanyDto> getCompanyById(@PathVariable Long companyId) {
-        CompanyDto companyDto = companyService.getCompanyById(companyId);
-        return ResponseEntity.ok(companyDto);
+    public ResponseEntity<CompanyResponse> getCompanyById(@PathVariable Long companyId) {
+        CompanyResponse companyResponse = companyService.getCompanyById(companyId);
+        return ResponseEntity.ok(companyResponse);
     }
 
     @PostMapping("/companies/user/{userId}")
-    public ResponseEntity<CompanyDto> addCompany(@RequestBody CompanyRequest companyRequest, @PathVariable Long userId) {
-        CompanyDto companyDto = companyService.addCompanyByUserId(companyRequest, userId);
-        return ResponseEntity.ok(companyDto);
+    public ResponseEntity<CompanyResponse> addCompany(@RequestBody CompanyRequest companyRequest,
+                                                      @PathVariable Long userId) {
+        CompanyResponse companyResponse = companyService.addCompanyByUserId(companyRequest, userId);
+        return ResponseEntity.ok(companyResponse);
     }
 
     @PutMapping("/companies/{id}")
-    public ResponseEntity<CompanyDto> updateCompany(@PathVariable Long id,
-                                                    @RequestBody CompanyRequest companyRequest) {
-        CompanyDto companyDto = companyService.updateCompany(companyRequest, id);
-        return ResponseEntity.ok(companyDto);
+    public ResponseEntity<CompanyResponse> updateCompany(@PathVariable Long id,
+                                                         @RequestBody CompanyRequest companyRequest) {
+        CompanyResponse companyResponse = companyService.updateCompany(companyRequest, id);
+        return ResponseEntity.ok(companyResponse);
     }
 
 

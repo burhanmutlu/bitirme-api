@@ -1,27 +1,33 @@
 package com.burhanmutlu.ws.entity;
 
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
+@Data
 @Table(name = "favorites")
-public class Favorite extends BaseEntity {
-    //Concidanteyi  column kullanılabilir ama bence saçma
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "favorite_type")
+public class Favorite {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
     private Long id;
 
-    @ManyToOne // her dosya sadece bir kullanıcıya özel o yüzden böyle.
+    @Column(name = "favorite_id", nullable = false)
+    private Long favoriteId;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at", updatable = false)
+    private Date createdAt;
+
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User userId;
-
-    @ManyToOne
-    @JoinColumn(name = "file_id", nullable = false)
-    private File fileId;
-
-    @ManyToOne
-    @JoinColumn(name = "logins_id", nullable = false)
-    private Logins loginsId;
 
 }

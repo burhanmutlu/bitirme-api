@@ -23,7 +23,7 @@ public abstract class BaseEntity implements Serializable {
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_at")
-    private Date updatedAt;
+    @Column(name = "last_modified")
+    private Date lastModified;
 
 }

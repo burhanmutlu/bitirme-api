@@ -7,6 +7,7 @@ import com.burhanmutlu.ws.dto.req.RegistrationRequest;
 import com.burhanmutlu.ws.entity.User;
 import com.burhanmutlu.ws.security.JwtTokenUtil;
 import com.burhanmutlu.ws.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,28 +21,23 @@ import javax.validation.Valid;
 
 @RestController
 @CrossOrigin
+@RequiredArgsConstructor
 @RequestMapping("/api/v1")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private final JwtTokenUtil jwtTokenUtil;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
     @PostMapping("/register")
     public ResponseEntity<GenericResponse> register(@Valid @RequestBody RegistrationRequest registrationRequest) {
         Boolean response = userService.createUser(registrationRequest);
-        //String message = (response == true) ? "{register.success.message}" : "{register.error.message}";
         // TODO: yabanci dil destegi
-        String message = (response == true) ? "başarılı" : "kullanıcı oluşmadı";
-
+        String message = (response) ? "user created" : "user not created";
         return ResponseEntity.ok(new GenericResponse(response, message));
     }
 
