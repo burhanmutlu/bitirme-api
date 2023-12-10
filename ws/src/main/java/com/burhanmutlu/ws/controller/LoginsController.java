@@ -56,7 +56,7 @@ public class LoginsController {
     @DeleteMapping("/logins/{id}")
     public ResponseEntity<?> deleteLoginsById(@PathVariable Long id) {
         loginsService.deleteLogins(id);
-        return ResponseEntity.ok(new GenericResponse(true, "logins is deleted"));
+        return ResponseEntity.ok(new GenericResponse(true, "Logins is deleted"));
     }
 
 }

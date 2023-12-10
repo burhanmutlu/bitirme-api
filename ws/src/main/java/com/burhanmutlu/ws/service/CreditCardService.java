@@ -13,7 +13,7 @@ public interface CreditCardService {
 
     CreditCardResponse addCreditCardByUserId(Long userId, CreditCardRequest creditCardRequest);
 
-    CreditCardResponse updateCreditCard(Long userId, CreditCardRequest creditCardRequest);
+    CreditCardResponse updateCreditCard(Long id, CreditCardRequest creditCardRequest);
 
     void deleteCreditCard(Long id);
 

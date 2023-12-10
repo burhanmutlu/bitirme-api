@@ -393,7 +393,7 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/Burhan Mutlu/Desktop/registration.txt"
+									"src": "/D:/BST/gitRepo/bitirme-api/wsTest.postman_collection.json"
 								}
 							]
 						},
@@ -427,12 +427,94 @@
 						"url": "http://localhost:8081/api/v1/files/bd045d81-0a16-4470-8650-3ad8034f3e64"
 					},
 					"response": []
+				},
+				{
+					"name": "updateFileNameById",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fileName\": \"burhack.exe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/api/v1/files/ae05fe87-b3c6-4018-be3e-431881149548"
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "creditCard",
-			"item": []
+			"item": [
+				{
+					"name": "addCreditCardByUserId",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cardName\": \"iş bankası\",\r\n    \"cardNumber\": \"1234123412341234\",\r\n    \"cardHolderName\": \"mutlu\",\r\n    \"expirationDate\": \"11/27\",\r\n    \"cvv\": \"300\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/api/v1/credit-cards/user/1"
+					},
+					"response": []
+				},
+				{
+					"name": "getCreditCardsByUserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8081/api/v1/credit-cards/user/1"
+					},
+					"response": []
+				},
+				{
+					"name": "getCreditCardById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8081/api/v1/credit-cards/1"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCreditCardById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8081/api/v1/credit-cards/1"
+					},
+					"response": []
+				},
+				{
+					"name": "updateCreditCardById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/api/v1/credit-cards/1"
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"auth": {

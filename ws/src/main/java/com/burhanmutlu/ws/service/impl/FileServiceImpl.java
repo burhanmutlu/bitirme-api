@@ -115,6 +115,16 @@ public class FileServiceImpl implements FileService {
         });
 
         fileRepository.deleteById(id);
+    }
 
+    @Override
+    public void updateFileNameById(String id, String fileName) {
+        File file = fileRepository.findById(id).orElseThrow(() -> {
+            throw new FileNotFoundException("file not found");
+        });
+
+        file.setFileName(fileName);
+
+        fileRepository.save(file);
     }
 }

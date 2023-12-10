@@ -1,5 +1,6 @@
 package com.burhanmutlu.ws.controller;
 
+import com.burhanmutlu.ws.dto.req.FileNameRequest;
 import com.burhanmutlu.ws.dto.resp.FileDataResponse;
 import com.burhanmutlu.ws.dto.resp.FileResponse;
 import com.burhanmutlu.ws.dto.resp.GenericResponse;
@@ -14,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -52,6 +52,12 @@ public class FileController {
     public ResponseEntity<?> deleteFileById(@PathVariable String id) {
         fileService.deleteFileById(id);
         return ResponseEntity.ok(new GenericResponse(true, "file is deleted"));
+    }
+
+    @PatchMapping("/files/{id}")
+    public ResponseEntity<?> updateFileNameById(@PathVariable String id, @RequestBody FileNameRequest fileName) {
+        fileService.updateFileNameById(id, fileName.getFileName());
+        return ResponseEntity.ok(new GenericResponse(true, "file name is updated"));
     }
 
 }

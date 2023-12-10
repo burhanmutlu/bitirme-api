@@ -19,4 +19,6 @@ public interface FileService {
 
     void deleteFileById(String id);
 
+    void updateFileNameById(String id, String fileName);
+
 }
