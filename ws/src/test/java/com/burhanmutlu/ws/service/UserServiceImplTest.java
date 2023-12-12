@@ -1,8 +1,8 @@
 package com.burhanmutlu.ws.service;
 
-import com.burhanmutlu.ws.entity.User;
-import com.burhanmutlu.ws.repository.UserRepository;
-import com.burhanmutlu.ws.service.impl.UserServiceImpl;
+import com.burhanmutlu.ws.user.User;
+import com.burhanmutlu.ws.user.UserRepository;
+import com.burhanmutlu.ws.user.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

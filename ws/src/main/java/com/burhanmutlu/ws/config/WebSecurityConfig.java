@@ -2,7 +2,7 @@ package com.burhanmutlu.ws.config;
 
 import com.burhanmutlu.ws.security.JwtAuthenticationEntryPoint;
 import com.burhanmutlu.ws.security.JwtFilter;
-import com.burhanmutlu.ws.service.impl.UserDetailsServiceImpl;
+import com.burhanmutlu.ws.user.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

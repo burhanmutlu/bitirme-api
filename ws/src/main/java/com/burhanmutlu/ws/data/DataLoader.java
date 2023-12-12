@@ -1,9 +1,9 @@
 package com.burhanmutlu.ws.data;
 
-import com.burhanmutlu.ws.dto.req.CompanyRequest;
-import com.burhanmutlu.ws.dto.req.RegistrationRequest;
-import com.burhanmutlu.ws.service.CompanyService;
-import com.burhanmutlu.ws.service.UserService;
+import com.burhanmutlu.ws.company.dto.req.CompanyRequest;
+import com.burhanmutlu.ws.user.dto.req.RegistrationRequest;
+import com.burhanmutlu.ws.company.CompanyService;
+import com.burhanmutlu.ws.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

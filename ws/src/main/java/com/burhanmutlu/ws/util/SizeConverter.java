@@ -1,7 +1,5 @@
 package com.burhanmutlu.ws.util;
 
-import org.springframework.context.annotation.Bean;
-
 import java.text.DecimalFormat;
 
 public class SizeConverter {
@@ -22,24 +20,24 @@ public class SizeConverter {
         byteVal = 0L;
     }
 
+    public void setValues(String sizeType, double result, long byteVal) {
+        this.sizeType = sizeType;
+        this.result = result;
+        this.byteVal = byteVal;
+    }
+
     public double convertToKB(long val) {
-        sizeType = "KB";
-        result = (double) val/MIN_KB;
-        byteVal = val;
+        setValues("KB", (double) val/MIN_KB, val);
         return result;
     }
 
     public double convertToMB(long val) {
-        sizeType = "MB";
-        result = (double) val/MIN_MB;
-        byteVal = val;
+        setValues("MB", (double) val/MIN_MB, val);
         return result;
     }
 
     public double convertToGB(long val) {
-        sizeType = "GB";
-        result = (double) val/MIN_GB;
-        byteVal = val;
+        setValues("GB", (double) val/MIN_GB, val);
         return result;
     }
 
