@@ -30,6 +30,8 @@ public class LoginsServiceImpl implements LoginsService {
 
     private final LoginsRepository loginsRepository;
 
+    private final LoginsMapper loginsMapper;
+
     @Override
     public List<LoginsResponse> getAllLoginsByUserId(Long id, int page, int size, String sortBy, String sortOrder) {
         User user = userService.getUserById(id);
@@ -44,15 +46,7 @@ public class LoginsServiceImpl implements LoginsService {
         Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortBy));
 
         loginsRepository.findAllByUserId(id, pageable).forEach(logins1 -> {
-            Long cId = logins1.getCompanyId().getId();
-            LoginsResponse loginsResponse = LoginsResponse.builder()
-                    .id(logins1.getId())
-                    .username(logins1.getUsername())
-                    .password(logins1.getPassword())
-                    .companyData(companyService.getCompanyById(cId))
-                    .build();
-            loginsResponseList.add(loginsResponse);
-        });
+            loginsResponseList.add(loginsMapper.toLoginsResponse(logins1)); });
 
         return loginsResponseList;
     }
@@ -63,85 +57,40 @@ public class LoginsServiceImpl implements LoginsService {
         Logins logins = loginsRepository.findById(id).orElseThrow(
                 () -> {throw new RuntimeException("not found"); });
 
-        Long cId = logins.getCompanyId().getId();
-
-        LoginsResponse loginsResponse = LoginsResponse.builder()
-                .id(logins.getId())
-                .username(logins.getUsername())
-                .password(logins.getPassword())
-                .companyData(companyService.getCompanyById(cId))
-                .build();
-
-        return loginsResponse;
+        return loginsMapper.toLoginsResponse(logins);
     }
 
     @Override
     public LoginsResponse addLoginsByUserId(Long id, LoginsRequest loginsRequest) {
         User user = userService.getUserById(id);
-        CompanyResponse companyResponse = companyService.getCompanyById(loginsRequest.getCompanyId());
-        Company company = Company.builder()
-                .id(companyResponse.getId())
-                .companyName(companyResponse.getCompanyName())
-                .companyLogo(companyResponse.getCompanyLogo())
-                .companyWebPage(companyResponse.getCompanyWebPage())
-                .build();
 
-        Logins logins = Logins.builder()
-                .userId(user)
-                .username(loginsRequest.getUsername())
-                .password(loginsRequest.getPassword())
-                .companyId(company)
-                .build();
+        Logins logins = loginsMapper.toLogins(loginsRequest);
+        logins.setUserId(user);
 
-        loginsRepository.save(logins);
+        logins = loginsRepository.save(logins);
 
-        LoginsResponse loginsResponse = LoginsResponse.builder()
-                .id(logins.getId())
-                .username(logins.getUsername())
-                .password(logins.getPassword())
-                .companyData(companyResponse)
-                .build();
-
-        return loginsResponse;
+        return loginsMapper.toLoginsResponse(logins);
     }
 
     @Override
     public LoginsResponse updateLogins(Long id, LoginsRequest loginsRequest) {
-        Logins logins = loginsRepository.findById(id).orElseThrow(() -> {throw new RuntimeException("not found"); });
+        Logins logins = loginsRepository.findById(id).orElseThrow(
+                () -> {throw new RuntimeException("not found"); });
+
         User user = userService.getUserById(logins.getUserId().getId());
 
-        CompanyResponse companyResponse = companyService.getCompanyById(loginsRequest.getCompanyId());
-        Company company = Company.builder()
-                .id(companyResponse.getId())
-                .companyName(companyResponse.getCompanyName())
-                .companyLogo(companyResponse.getCompanyLogo())
-                .companyWebPage(companyResponse.getCompanyWebPage())
-                .build();
-
-
-        logins = Logins.builder()
-                .id(id)
-                .userId(user)
-                .username(loginsRequest.getUsername())
-                .password(loginsRequest.getPassword())
-                .companyId(company)
-                .build();
+        logins = loginsMapper.toLogins(loginsRequest);
+        logins.setUserId(user); logins.setId(id);
 
         loginsRepository.save(logins);
 
-        LoginsResponse loginsResponse = LoginsResponse.builder()
-                .id(logins.getId())
-                .username(logins.getUsername())
-                .password(logins.getPassword())
-                .companyData(companyResponse)
-                .build();
-
-        return loginsResponse;
+        return loginsMapper.toLoginsResponse(logins);
     }
 
     @Override
     public void deleteLogins(Long id) {
-        Logins logins = loginsRepository.findById(id).orElseThrow(() -> {throw new RuntimeException("not found"); });
+        Logins logins = loginsRepository.findById(id).orElseThrow(
+                () -> {throw new RuntimeException("not found"); });
         loginsRepository.deleteById(id);
     }
 }

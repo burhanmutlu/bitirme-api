@@ -23,6 +23,8 @@ public class CompanyServiceImpl implements CompanyService {
 
     private final UserService userService;
 
+    private final CompanyMapper companyMapper;
+
     @Override
     public List<CompanyResponse> getAllCompaniesByUserId(Long id) {
         User user = userService.getUserById(id);
@@ -34,16 +36,12 @@ public class CompanyServiceImpl implements CompanyService {
         for(Company company : companies) {
             updatable = true;
 
-            if(company.getUserId().getId() == 1) {
+            if(company.getUserId().getId() == 1)
                 updatable = false;
-            }
-            CompanyResponse companyResponse = CompanyResponse.builder()
-                    .id(company.getId())
-                    .companyName(company.getCompanyName())
-                    .companyLogo(company.getCompanyLogo())
-                    .companyWebPage(company.getCompanyWebPage())
-                    .updatable(updatable)
-                    .build();
+
+            CompanyResponse companyResponse = companyMapper.toCompanyResponse(company);
+            companyResponse.setUpdatable(updatable);
+
             companyResponseList.add(companyResponse);
         }
         return companyResponseList;
@@ -53,44 +51,27 @@ public class CompanyServiceImpl implements CompanyService {
     public CompanyResponse getCompanyById(Long id) {
         Company company = companyRepository.findById(id).orElseThrow(
                 () -> { throw new CompanyNotFoundException("Company not found"); });
-        boolean updatable = true;
-        if(company.getUserId().getId() == 1) {
-            updatable = false;
-        }
 
-        CompanyResponse companyResponse = CompanyResponse.builder()
-                .id(company.getId())
-                .companyName(company.getCompanyName())
-                .companyLogo(company.getCompanyLogo())
-                .updatable(updatable)
-                .companyWebPage(company.getCompanyWebPage()).build();
+        boolean updatable = true;
+        if(company.getUserId().getId() == 1)
+            updatable = false;
+
+        CompanyResponse companyResponse = companyMapper.toCompanyResponse(company);
+        companyResponse.setUpdatable(updatable);
 
         return companyResponse;
     }
 
     @Override
     public CompanyResponse addCompanyByUserId(CompanyRequest request, Long userId) {
-
         User user = userService.getUserById(userId);
 
-        Company company = Company.builder()
-                .companyName(request.getCompanyName())
-                .companyLogo(request.getCompanyLogo())
-                .companyWebPage(request.getCompanyWebPage())
-                .userId(user)
-                .build();
+        Company company = companyMapper.toCompany(request);
+        company.setUserId(user);
 
         company = companyRepository.save(company);
 
-        CompanyResponse companyResponse = CompanyResponse.builder()
-                .companyName(company.getCompanyName())
-                .companyWebPage(company.getCompanyWebPage())
-                .companyLogo(company.getCompanyLogo())
-                .id(userId)
-                .updatable(true)
-                .build();
-
-        return companyResponse;
+        return companyMapper.toCompanyResponse(company);
     }
 
     @Override
@@ -98,28 +79,15 @@ public class CompanyServiceImpl implements CompanyService {
         Company company = companyRepository.findById(id).orElseThrow(
                 () -> { throw new CompanyNotFoundException("company not found"); });
 
-        if(company.getUserId().getId() == 1) {
+        if(company.getUserId().getId() == 1)
             throw new RuntimeException("You do not have the authority to change");
-        }
 
-        company = Company.builder()
-                .companyName(companyRequest.getCompanyName())
-                .companyLogo(companyRequest.getCompanyLogo())
-                .companyWebPage(companyRequest.getCompanyWebPage())
-                .id(id)
-                .build();
+        company = companyMapper.toCompany(companyRequest);
+        company.setId(id);
 
-        companyRepository.save(company);
+        company = companyRepository.save(company);
 
-        CompanyResponse companyResponse = CompanyResponse.builder()
-                .id(company.getId())
-                .companyName(company.getCompanyName())
-                .companyLogo(company.getCompanyLogo())
-                .companyWebPage(company.getCompanyWebPage())
-                .updatable(true)
-                .build();
-
-        return companyResponse;
+        return companyMapper.toCompanyResponse(company);
     }
 
     @Override

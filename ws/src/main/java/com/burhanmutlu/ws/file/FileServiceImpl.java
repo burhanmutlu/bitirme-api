@@ -27,51 +27,30 @@ public class FileServiceImpl implements FileService {
     private final FileRepository fileRepository;
 
     private final UserService userService;
+    
+    private final FileMapper fileMapper;
 
     @Override
     public FileResponse addFileByUserId(Long userId, MultipartFile file) throws IOException {
         User user = userService.getUserById(userId);
-        String fileName = file.getOriginalFilename();
-
-        File file1 = File.builder()
-                .userId(user)
-                .fileName(fileName)
-                .type(file.getContentType())
-                .data(file.getBytes())
-                .build();
-        fileRepository.save(file1);
-
-        String fileDownloadUri = ServletUriComponentsBuilder
-                .fromCurrentContextPath()
-                .path("/api/v1/files/")
-                .path(file1.getId().toString())
-                .toUriString();
-
-        SizeConverter sizeConverter = new SizeConverter();
-        sizeConverter.autoConvert(file1.getData().length);
-
-        FileResponse fileResponse = FileResponse.builder()
-                .name(file1.getFileName())
-                .size(sizeConverter.getSizeString())
-                .url(fileDownloadUri)
-                .type(file1.getType())
-                .build();
-
-        return fileResponse;
+        return fileMapper.toFileResponse(
+                fileRepository.save( File.builder()
+                    .userId(user)
+                    .fileName(file.getOriginalFilename())
+                    .type(file.getContentType())
+                    .data(file.getBytes())
+                    .build() ));
     }
 
     @Override
     public FileDataResponse getFileById(String id) {
-        File file = fileRepository.findById(id).orElseThrow(() -> {
-            throw new FileNotFoundException("file not found");
-        });
+        File file = fileRepository.findById(id).orElseThrow(
+                () -> { throw new FileNotFoundException("file not found"); });
 
-        FileDataResponse fileDataResponse = FileDataResponse.builder()
+        return FileDataResponse.builder()
                 .fileName(file.getFileName())
                 .data(file.getData())
                 .build();
-
-        return fileDataResponse;
     }
 
     @Override
@@ -81,23 +60,7 @@ public class FileServiceImpl implements FileService {
         List<FileResponse> fileResponseList = new ArrayList<>();
 
         fileRepository.findAllByUserId(userId).forEach(file -> {
-
-            String fileDownloadUri = ServletUriComponentsBuilder
-                    .fromCurrentContextPath()
-                    .path("/api/v1/files/")
-                    .path(file.getId().toString())
-                    .toUriString();
-
-            SizeConverter sizeConverter = new SizeConverter();
-            sizeConverter.autoConvert(file.getData().length);
-
-            FileResponse fileResponse = FileResponse.builder()
-                    .name(file.getFileName())
-                    .url(fileDownloadUri)
-                    .size(sizeConverter.getSizeString())
-                    .type(file.getType())
-                    .build();
-            fileResponseList.add(fileResponse);
+            fileResponseList.add(fileMapper.toFileResponse(file));
         });
 
         return fileResponseList;
@@ -105,18 +68,16 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void deleteFileById(String id) {
-        File file = fileRepository.findById(id).orElseThrow(() -> {
-            throw new FileNotFoundException("file not found");
-        });
+        File file = fileRepository.findById(id).orElseThrow(
+                () -> { throw new FileNotFoundException("file not found"); });
 
         fileRepository.deleteById(id);
     }
 
     @Override
     public void updateFileNameById(String id, String fileName) {
-        File file = fileRepository.findById(id).orElseThrow(() -> {
-            throw new FileNotFoundException("file not found");
-        });
+        File file = fileRepository.findById(id).orElseThrow(
+                () -> {  throw new FileNotFoundException("file not found"); });
 
         file.setFileName(fileName);
 

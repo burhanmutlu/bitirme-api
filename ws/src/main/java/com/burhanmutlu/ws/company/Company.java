@@ -20,13 +20,13 @@ public class Company extends BaseEntity {
     @Column(name = "id", updatable = false)
     private Long id;
 
-    @Column(name = "company_name", unique = true)
+    @Column(name = "company_name")
     private String companyName;
 
     @Column(name = "company_logo")
     private String companyLogo;
 
-    @Column(name = "company_web_page", unique = true)
+    @Column(name = "company_web_page")
     private String companyWebPage;
 
     @ManyToOne
