@@ -12,6 +12,6 @@ import java.util.List;
 public interface LoginsRepository extends JpaRepository<Logins, Long> {
 
     @Query("SELECT l FROM Logins l JOIN l.userId u WHERE u.id = :userId")
-    public List<Logins> findAllByUserId(@Param("userId") Long userId, Pageable pageable);
+    List<Logins> findAllByUserId(@Param("userId") Long userId, Pageable pageable);
 
 }

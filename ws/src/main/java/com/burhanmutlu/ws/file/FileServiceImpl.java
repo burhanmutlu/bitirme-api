@@ -15,7 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalField;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -46,6 +49,8 @@ public class FileServiceImpl implements FileService {
     public FileDataResponse getFileById(String id) {
         File file = fileRepository.findById(id).orElseThrow(
                 () -> { throw new FileNotFoundException("file not found"); });
+        file.setLastOpened(new Date());
+        fileRepository.save(file);
 
         return FileDataResponse.builder()
                 .fileName(file.getFileName())
@@ -60,8 +65,7 @@ public class FileServiceImpl implements FileService {
         List<FileResponse> fileResponseList = new ArrayList<>();
 
         fileRepository.findAllByUserId(userId).forEach(file -> {
-            fileResponseList.add(fileMapper.toFileResponse(file));
-        });
+            fileResponseList.add(fileMapper.toFileResponse(file)); });
 
         return fileResponseList;
     }
@@ -82,5 +86,16 @@ public class FileServiceImpl implements FileService {
         file.setFileName(fileName);
 
         fileRepository.save(file);
+    }
+
+    @Override
+    @Transactional
+    public List<FileResponse> getRecommended10FilesByUserId(Long userId) {
+        User user = userService.getUserById(userId);
+        List<FileResponse> fileResponseList = new ArrayList<>();
+        fileRepository.findByUserIdOrderByLastOpenedDesc(userId).stream().limit(10).forEach(file -> {
+            fileResponseList.add(fileMapper.toFileResponse(file)); });
+
+        return fileResponseList;
     }
 }

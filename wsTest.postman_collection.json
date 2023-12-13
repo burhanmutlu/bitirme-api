@@ -127,7 +127,7 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8081/api/v1/companies/user/1"
+						"url": "http://localhost:8081/api/v1/companies/user/2"
 					},
 					"response": []
 				},
@@ -183,14 +183,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"companyName\": \"burhack\",\r\n    \"companyLogo\": \"logo123\",\r\n    \"companyWebPage\": \"burhanmutlu.tech\"\r\n}",
+							"raw": "{\r\n    \"companyName\": \"burhack221\",\r\n    \"companyLogo\": \"logo123\",\r\n    \"companyWebPage\": \"burhanmutlu.tech122\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8081/api/v1/companies/user/1"
+						"url": "http://localhost:8081/api/v1/companies/user/2"
 					},
 					"response": []
 				}
@@ -211,7 +211,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/api/v1/logins/user/1?page=0&size=10&sortBy=id&sortOrder=desc",
+							"raw": "http://localhost:8081/api/v1/logins/user/1?page=0&size=10&sortBy=id&sortOrder=asc",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -239,7 +239,7 @@
 								},
 								{
 									"key": "sortOrder",
-									"value": "desc"
+									"value": "asc"
 								}
 							]
 						}
@@ -393,7 +393,7 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/D:/BST/gitRepo/bitirme-api/wsTest.postman_collection.json"
+									"src": "/D:/BST/gitRepo/bitirme-api/ws/src/main/java/com/burhanmutlu/ws/company/exception/CompanyNotFoundException.java"
 								}
 							]
 						},
@@ -415,7 +415,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8081/api/v1/files/bd045d81-0a16-4470-8650-3ad8034f3e64"
+						"url": "http://localhost:8081/api/v1/files/328acd34-8ed2-4358-8888-d6377d8f7b60"
 					},
 					"response": []
 				},
@@ -424,7 +424,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:8081/api/v1/files/bd045d81-0a16-4470-8650-3ad8034f3e64"
+						"url": "http://localhost:8081/api/v1/files/538aa6b2-c6c8-4a22-bd5b-9ee8de26a970"
 					},
 					"response": []
 				},
@@ -442,7 +442,15 @@
 								}
 							}
 						},
-						"url": "http://localhost:8081/api/v1/files/ae05fe87-b3c6-4018-be3e-431881149548"
+						"url": "http://localhost:8081/api/v1/files/328acd34-8ed2-4358-8888-d6377d8f7b60"
+					},
+					"response": []
+				},
+				{
+					"name": "getRecommended10Files",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}
@@ -470,7 +478,7 @@
 					"response": []
 				},
 				{
-					"name": "getCreditCardsByUserId",
+					"name": "getAllCreditCardsByUserId",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -483,7 +491,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8081/api/v1/credit-cards/1"
+						"url": "http://localhost:8081/api/v1/credit-cards/2"
 					},
 					"response": []
 				},
@@ -503,14 +511,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \r\n}",
+							"raw": "{\r\n    \"cardName\": \"vakıf bankası\",\r\n    \"cardNumber\": \"1234123412341234\",\r\n    \"cardHolderName\": \"mutlu\",\r\n    \"expirationDate\": \"11/27\",\r\n    \"cvv\": \"300\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8081/api/v1/credit-cards/1"
+						"url": "http://localhost:8081/api/v1/credit-cards/2"
 					},
 					"response": []
 				}

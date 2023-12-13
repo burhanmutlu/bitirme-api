@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -48,15 +49,21 @@ public class FileController {
     }
 
     @DeleteMapping("/files/{id}")
-    public ResponseEntity<?> deleteFileById(@PathVariable String id) {
+    public ResponseEntity<GenericResponse> deleteFileById(@PathVariable String id) {
         fileService.deleteFileById(id);
         return ResponseEntity.ok(new GenericResponse(true, "file is deleted"));
     }
 
     @PatchMapping("/files/{id}")
-    public ResponseEntity<?> updateFileNameById(@PathVariable String id, @RequestBody FileNameRequest fileName) {
+    public ResponseEntity<GenericResponse> updateFileNameById(@PathVariable String id, @RequestBody FileNameRequest fileName) {
         fileService.updateFileNameById(id, fileName.getFileName());
         return ResponseEntity.ok(new GenericResponse(true, "file name is updated"));
+    }
+
+    @GetMapping("/files/user/{userId}/recommended")
+    public ResponseEntity<List<FileResponse>> getRecommendedFilesByUserId(@PathVariable Long userId) {
+        List<FileResponse> fileResponseList = fileService.getRecommended10FilesByUserId(userId);
+        return ResponseEntity.ok(fileResponseList);
     }
 
 }

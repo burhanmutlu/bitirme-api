@@ -18,4 +18,6 @@ public interface FileService {
 
     void updateFileNameById(String id, String fileName);
 
+    List<FileResponse> getRecommended10FilesByUserId(Long userId);
+
 }
