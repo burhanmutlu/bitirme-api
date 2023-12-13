@@ -1,7 +1,6 @@
 package com.burhanmutlu.ws.logins;
 
 import com.burhanmutlu.ws.company.Company;
-import com.burhanmutlu.ws.company.CompanyMapper;
 import com.burhanmutlu.ws.company.CompanyService;
 import com.burhanmutlu.ws.company.dto.resp.CompanyResponse;
 import com.burhanmutlu.ws.logins.dto.req.LoginsRequest;

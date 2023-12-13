@@ -1,10 +1,12 @@
 package com.burhanmutlu.ws.company;
 
+import com.burhanmutlu.ws.logins.Logins;
 import com.burhanmutlu.ws.shared.BaseEntity;
 import com.burhanmutlu.ws.user.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,7 +32,10 @@ public class Company extends BaseEntity {
     private String companyWebPage;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User userId;
+
+    @OneToMany(mappedBy = "companyId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Logins> logins;
 
 }

@@ -1,9 +1,8 @@
 package com.burhanmutlu.ws.logins;
 
-import com.burhanmutlu.ws.company.dto.resp.CompanyResponse;
 import com.burhanmutlu.ws.logins.dto.req.LoginsRequest;
 import com.burhanmutlu.ws.logins.dto.resp.LoginsResponse;
-import com.burhanmutlu.ws.company.Company;
+import com.burhanmutlu.ws.logins.exception.LoginsNotFoundException;
 import com.burhanmutlu.ws.user.User;
 import com.burhanmutlu.ws.company.CompanyService;
 import com.burhanmutlu.ws.user.UserService;
@@ -55,7 +54,7 @@ public class LoginsServiceImpl implements LoginsService {
     public LoginsResponse getLoginsById(Long id) {
         //TODO exception
         Logins logins = loginsRepository.findById(id).orElseThrow(
-                () -> {throw new RuntimeException("not found"); });
+                () -> {throw new LoginsNotFoundException("Logins not found"); });
 
         return loginsMapper.toLoginsResponse(logins);
     }
@@ -75,7 +74,7 @@ public class LoginsServiceImpl implements LoginsService {
     @Override
     public LoginsResponse updateLogins(Long id, LoginsRequest loginsRequest) {
         Logins logins = loginsRepository.findById(id).orElseThrow(
-                () -> {throw new RuntimeException("not found"); });
+                () -> {throw new LoginsNotFoundException("Logins not found"); });
 
         User user = userService.getUserById(logins.getUserId().getId());
 
@@ -90,7 +89,7 @@ public class LoginsServiceImpl implements LoginsService {
     @Override
     public void deleteLogins(Long id) {
         Logins logins = loginsRepository.findById(id).orElseThrow(
-                () -> {throw new RuntimeException("not found"); });
+                () -> {throw new LoginsNotFoundException("Logins not found"); });
         loginsRepository.deleteById(id);
     }
 }

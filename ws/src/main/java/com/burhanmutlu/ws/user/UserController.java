@@ -51,4 +51,9 @@ public class UserController {
         return ResponseEntity.ok(new AuthResponse(token, user.getEmail()));
     }
 
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<?> deleteUserById(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.ok(new GenericResponse(true, "user is deleted"));
+    }
 }

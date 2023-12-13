@@ -28,7 +28,7 @@ public class Favorite {
     private Date createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User userId;
 
 }

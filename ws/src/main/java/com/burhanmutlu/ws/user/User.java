@@ -3,8 +3,15 @@ package com.burhanmutlu.ws.user;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
+import com.burhanmutlu.ws.company.Company;
+import com.burhanmutlu.ws.creditCard.CreditCard;
+import com.burhanmutlu.ws.favorite.Favorite;
+import com.burhanmutlu.ws.file.File;
+import com.burhanmutlu.ws.logins.Logins;
 import com.burhanmutlu.ws.shared.BaseEntity;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -35,5 +42,21 @@ public class User extends BaseEntity {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Company> company;
+
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<File> file;
+
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CreditCard> creditCard;
+
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Logins> logins;
+
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Favorite> favorite;
+
 
 }
