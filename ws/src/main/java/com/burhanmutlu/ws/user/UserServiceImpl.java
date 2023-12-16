@@ -1,5 +1,6 @@
 package com.burhanmutlu.ws.user;
 
+import com.burhanmutlu.ws.email.EmailService;
 import com.burhanmutlu.ws.user.dto.req.RegistrationRequest;
 import com.burhanmutlu.ws.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,8 @@ public class UserServiceImpl implements UserService {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final EmailService emailService;
+
     /**
      * Creates a new user
      * @param user Is the object of the user to be created
@@ -37,6 +40,10 @@ public class UserServiceImpl implements UserService {
                     .build();
             userRepository.save(user);
             log.info("created user-email: " + user.getEmail());
+            StringBuilder body = new StringBuilder();
+            body.append(user.getName());
+            body.append(", uygulamaya kayıt olduğunuz için sizi tebrik ederiz..");
+            emailService.sendEmail(user.getEmail(), "Uygulamaya hoş geldiniz :)", body.toString());
             return true;
         } catch (Exception exception) {
             log.error("dont created user- " + exception.getMessage());
