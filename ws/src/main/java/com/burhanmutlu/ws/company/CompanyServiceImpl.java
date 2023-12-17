@@ -40,7 +40,7 @@ public class CompanyServiceImpl implements CompanyService {
                 updatable = false;
 
             CompanyResponse companyResponse = companyMapper.toCompanyResponse(company);
-            companyResponse.setUpdatable(updatable);
+            companyResponse.setIsUpdatable(updatable);
 
             companyResponseList.add(companyResponse);
         }
@@ -57,7 +57,7 @@ public class CompanyServiceImpl implements CompanyService {
             updatable = false;
 
         CompanyResponse companyResponse = companyMapper.toCompanyResponse(company);
-        companyResponse.setUpdatable(updatable);
+        companyResponse.setIsUpdatable(updatable);
 
         return companyResponse;
     }

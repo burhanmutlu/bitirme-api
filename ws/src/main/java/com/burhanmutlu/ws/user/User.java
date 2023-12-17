@@ -36,7 +36,6 @@ public class User extends BaseEntity {
     @Column(name = "email", unique = true, nullable = false, length = 60)
     private String email;
 
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
     @Column(name = "password")
     private String password;
 
@@ -58,5 +57,10 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Favorite> favorite;
 
-
+    @PrePersist
+    @PreUpdate
+    private void beforeSaveOrUpdate() {
+        name = Character.toUpperCase(name.charAt(0)) + name.substring(1).toLowerCase();
+        surname = Character.toUpperCase(surname.charAt(0)) + surname.substring(1).toLowerCase();
+    }
 }

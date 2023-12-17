@@ -1,11 +1,13 @@
 package com.burhanmutlu.ws.user;
 
+import com.burhanmutlu.ws.shared.LocalMessages;
 import com.burhanmutlu.ws.user.dto.resp.AuthResponse;
 import com.burhanmutlu.ws.shared.GenericResponse;
 import com.burhanmutlu.ws.user.dto.req.LoginRequest;
 import com.burhanmutlu.ws.user.dto.req.RegistrationRequest;
 import com.burhanmutlu.ws.security.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,8 +35,8 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<GenericResponse> register(@Valid @RequestBody RegistrationRequest registrationRequest) {
         Boolean response = userService.createUser(registrationRequest);
-        // TODO: yabanci dil destegi
-        String message = (response) ? "user created" : "user not created";
+        String message = (response) ?
+                LocalMessages.get("register.success.message") : LocalMessages.get("register.error.message");
         return ResponseEntity.ok(new GenericResponse(response, message));
     }
 

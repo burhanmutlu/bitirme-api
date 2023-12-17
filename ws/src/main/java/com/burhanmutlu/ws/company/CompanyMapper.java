@@ -13,7 +13,7 @@ public class CompanyMapper {
                 .companyName(company.getCompanyName())
                 .companyLogo(company.getCompanyLogo())
                 .companyWebPage(company.getCompanyWebPage())
-                .updatable(true)
+                .isUpdatable(true)
                 .build();
     }
 

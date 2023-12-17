@@ -6,11 +6,9 @@ import com.burhanmutlu.ws.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
-@Service // This way autowired works
+@Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
@@ -18,9 +16,9 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    private final PasswordEncoder passwordEncoder;
-
     private final EmailService emailService;
+
+    private final UserMapper userMapper;
 
     /**
      * Creates a new user
@@ -30,20 +28,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean createUser(RegistrationRequest registrationRequest){
         try {
-            // TODO mapper kullan
-            User user = User.builder()
-                    .name(registrationRequest.getName())
-                    .surname(registrationRequest.getSurname())
-                    .email(registrationRequest.getEmail())
-                    .password(passwordEncoder.encode(registrationRequest.getPassword()))
-                    .phoneNumber(registrationRequest.getPhoneNumber())
-                    .build();
+            User user = userMapper.toUser(registrationRequest);
             userRepository.save(user);
             log.info("created user-email: " + user.getEmail());
-            StringBuilder body = new StringBuilder();
-            body.append(user.getName());
-            body.append(", uygulamaya kayıt olduğunuz için sizi tebrik ederiz..");
-            emailService.sendEmail(user.getEmail(), "Uygulamaya hoş geldiniz :)", body.toString());
+            emailService.sendEmail(user.getEmail(),"hoş geldin", user.getName());
             return true;
         } catch (Exception exception) {
             log.error("dont created user- " + exception.getMessage());

@@ -15,7 +15,7 @@ public class CompanyResponse {
 
     private String companyWebPage;
 
-    private Boolean updatable;
+    private Boolean isUpdatable;
 
 
 }

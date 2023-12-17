@@ -3,6 +3,7 @@ package com.burhanmutlu.ws.company;
 import com.burhanmutlu.ws.company.dto.resp.CompanyResponse;
 import com.burhanmutlu.ws.company.dto.req.CompanyRequest;
 import com.burhanmutlu.ws.shared.GenericResponse;
+import com.burhanmutlu.ws.shared.LocalMessages;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,7 +48,7 @@ public class CompanyController {
     @DeleteMapping("/companies/{companyId}")
     public ResponseEntity<?> deleteCompanyById(@PathVariable Long companyId) {
         companyService.deleteCompany(companyId);
-        return ResponseEntity.ok(new GenericResponse(true, "company is deleted"));
+        return ResponseEntity.ok(new GenericResponse(true, LocalMessages.get("company.delete.success.message")));
     }
 
 
