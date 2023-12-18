@@ -1,7 +1,6 @@
 package com.burhanmutlu.ws.shared;
 
 import javax.persistence.*;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;

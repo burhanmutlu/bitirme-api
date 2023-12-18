@@ -6,6 +6,10 @@ import java.io.IOException;
 
 public interface EmailService {
 
-    void sendEmail(String toEmail, String subject, String body) throws MessagingException, IOException;
+    void sendWelcomeEmail(String toEmail) throws MessagingException, IOException;
+
+    void sendActivationEmail(String toEmail, String activationToken) throws MessagingException, IOException;
+
+    void sendPasswordResetEmail(String toEmail, String passwordResetToken) throws MessagingException, IOException;
 
 }

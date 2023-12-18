@@ -42,6 +42,12 @@ public class User extends BaseEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    private boolean isActive;
+
+    private String activationToken;
+
+    private String passwordResetToken;
+
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Company> company;
 

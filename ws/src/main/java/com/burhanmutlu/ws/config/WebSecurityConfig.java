@@ -37,8 +37,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-ui/**",
             "/swagger-ui",
             "/v3/api-docs/**",
-            "/swagger-ui.html"
-    };
+            "/swagger-ui.html",
+            "/api/v1/**"
+    };//TODO security
 
     @Override
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)

@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
+
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -32,10 +35,10 @@ public class DataLoader implements CommandLineRunner {
         createCompany("Twitter", "logo", "https://twitter.com");
     }
 
-    public void createUser() {
+    public void createUser() throws MessagingException, IOException {
         RegistrationRequest registrationRequest = RegistrationRequest.builder()
-                .name("burhack")
-                .surname("mutlu")
+                .name("test")
+                .surname("test")
                 .email("burhackmutlu@gmail.com")
                 .password("1234")
                 .phoneNumber("05459606598")
