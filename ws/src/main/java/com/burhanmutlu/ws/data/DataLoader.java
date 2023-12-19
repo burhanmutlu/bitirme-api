@@ -1,6 +1,7 @@
 package com.burhanmutlu.ws.data;
 
 import com.burhanmutlu.ws.company.dto.req.CompanyRequest;
+import com.burhanmutlu.ws.company.dto.resp.CompanyResponse;
 import com.burhanmutlu.ws.user.dto.req.RegistrationRequest;
 import com.burhanmutlu.ws.company.CompanyService;
 import com.burhanmutlu.ws.user.UserService;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.util.List;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -26,13 +28,16 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        createUser();
-        createCompany("Instagram", "logo", "https://instagram.com");
-        createCompany("Facebook", "logo", "https://facebook.com");
-        createCompany("LinkedIn", "logo", "https://linkedin.com");
-        createCompany("GitHub", "logo", "https://github.com");
-        createCompany("Google", "logo", "https://google.com");
-        createCompany("Twitter", "logo", "https://twitter.com");
+        List<CompanyResponse> val =  companyService.getAllCompaniesByUserId(1L);
+        if(val.isEmpty()) {
+            createUser();
+            createCompany("Instagram", "logo", "https://instagram.com");
+            createCompany("Facebook", "logo", "https://facebook.com");
+            createCompany("LinkedIn", "logo", "https://linkedin.com");
+            createCompany("GitHub", "logo", "https://github.com");
+            createCompany("Google", "logo", "https://google.com");
+            createCompany("Twitter", "logo", "https://twitter.com");
+        }
     }
 
     public void createUser() throws MessagingException, IOException {
