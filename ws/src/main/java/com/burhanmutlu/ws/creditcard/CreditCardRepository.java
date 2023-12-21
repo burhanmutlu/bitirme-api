@@ -1,4 +1,4 @@
-package com.burhanmutlu.ws.creditCard;
+package com.burhanmutlu.ws.creditcard;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

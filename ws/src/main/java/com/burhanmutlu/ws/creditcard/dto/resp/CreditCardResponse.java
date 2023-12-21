@@ -1,9 +1,7 @@
-package com.burhanmutlu.ws.creditCard.dto.resp;
+package com.burhanmutlu.ws.creditcard.dto.resp;
 
 import lombok.Builder;
 import lombok.Data;
-
-import javax.validation.constraints.NotNull;
 
 @Data
 @Builder

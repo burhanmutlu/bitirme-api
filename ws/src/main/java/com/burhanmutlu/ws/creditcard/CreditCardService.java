@@ -1,7 +1,7 @@
-package com.burhanmutlu.ws.creditCard;
+package com.burhanmutlu.ws.creditcard;
 
-import com.burhanmutlu.ws.creditCard.dto.req.CreditCardRequest;
-import com.burhanmutlu.ws.creditCard.dto.resp.CreditCardResponse;
+import com.burhanmutlu.ws.creditcard.dto.req.CreditCardRequest;
+import com.burhanmutlu.ws.creditcard.dto.resp.CreditCardResponse;
 
 import java.util.List;
 

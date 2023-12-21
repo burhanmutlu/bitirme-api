@@ -1,10 +1,9 @@
 package com.burhanmutlu.ws.user;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
 
 import com.burhanmutlu.ws.company.Company;
-import com.burhanmutlu.ws.creditCard.CreditCard;
+import com.burhanmutlu.ws.creditcard.CreditCard;
 import com.burhanmutlu.ws.favorite.Favorite;
 import com.burhanmutlu.ws.file.File;
 import com.burhanmutlu.ws.logins.Logins;

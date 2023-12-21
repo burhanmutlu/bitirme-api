@@ -1,4 +1,4 @@
-package com.burhanmutlu.ws.creditCard.dto.req;
+package com.burhanmutlu.ws.creditcard.dto.req;
 
 import lombok.Builder;
 import lombok.Data;

@@ -36,6 +36,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public FileResponse addFileByUserId(Long userId, MultipartFile file) throws IOException {
         User user = userService.getUserById(userId);
+        log.info("file is uploading...");
         return fileMapper.toFileResponse(
                 fileRepository.save( File.builder()
                     .userId(user)
@@ -52,6 +53,8 @@ public class FileServiceImpl implements FileService {
         file.setLastOpened(new Date());
         fileRepository.save(file);
 
+        log.info("getting file by id: " + id);
+
         return FileDataResponse.builder()
                 .fileName(file.getFileName())
                 .data(file.getData())
@@ -67,6 +70,8 @@ public class FileServiceImpl implements FileService {
         fileRepository.findAllByUserId(userId).forEach(file -> {
             fileResponseList.add(fileMapper.toFileResponse(file)); });
 
+        log.info("getting all files..");
+
         return fileResponseList;
     }
 
@@ -74,6 +79,8 @@ public class FileServiceImpl implements FileService {
     public void deleteFileById(String id) {
         File file = fileRepository.findById(id).orElseThrow(
                 () -> { throw new FileNotFoundException("file not found"); });
+
+        log.info("deleted file id: " + id);
 
         fileRepository.deleteById(id);
     }
@@ -86,6 +93,8 @@ public class FileServiceImpl implements FileService {
         file.setFileName(fileName);
 
         fileRepository.save(file);
+
+        log.info("updated file name: " + fileName);
     }
 
     @Override
@@ -95,6 +104,8 @@ public class FileServiceImpl implements FileService {
         List<FileResponse> fileResponseList = new ArrayList<>();
         fileRepository.findByUserIdOrderByLastOpenedDesc(userId).stream().limit(10).forEach(file -> {
             fileResponseList.add(fileMapper.toFileResponse(file)); });
+
+        log.info("getting recommended 10 files");
 
         return fileResponseList;
     }

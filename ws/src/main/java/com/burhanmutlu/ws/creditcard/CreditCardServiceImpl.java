@@ -1,8 +1,8 @@
-package com.burhanmutlu.ws.creditCard;
+package com.burhanmutlu.ws.creditcard;
 
-import com.burhanmutlu.ws.creditCard.dto.req.CreditCardRequest;
-import com.burhanmutlu.ws.creditCard.dto.resp.CreditCardResponse;
-import com.burhanmutlu.ws.creditCard.exception.CreditCardNotFoundException;
+import com.burhanmutlu.ws.creditcard.dto.req.CreditCardRequest;
+import com.burhanmutlu.ws.creditcard.dto.resp.CreditCardResponse;
+import com.burhanmutlu.ws.creditcard.exception.CreditCardNotFoundException;
 import com.burhanmutlu.ws.user.User;
 import com.burhanmutlu.ws.user.UserService;
 import lombok.RequiredArgsConstructor;

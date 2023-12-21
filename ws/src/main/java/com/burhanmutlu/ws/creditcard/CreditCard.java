@@ -1,4 +1,4 @@
-package com.burhanmutlu.ws.creditCard;
+package com.burhanmutlu.ws.creditcard;
 
 import com.burhanmutlu.ws.shared.BaseEntity;
 import com.burhanmutlu.ws.user.User;

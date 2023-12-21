@@ -38,8 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-ui",
             "/v3/api-docs/**",
             "/swagger-ui.html",
-            "/api/v1/**"
-    };//TODO security
+            "/api/v1/users/password-reset"
+    };
 
     @Override
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
