@@ -33,7 +33,7 @@ public class FileController {
     }
 
     @GetMapping("/files/user/{userId}")
-    public ResponseEntity<List<FileResponse>> getAllFilesByUserId(@PathVariable Long userId) {
+    public ResponseEntity<List<FileResponse>> getAllFilesByUserId(@PathVariable("userId") Long userId) {
         List<FileResponse> fileResponses = fileService.getAllFilesByUserId(userId);
         return ResponseEntity.ok(fileResponses);
     }

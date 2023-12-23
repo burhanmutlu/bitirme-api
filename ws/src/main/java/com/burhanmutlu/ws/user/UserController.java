@@ -53,7 +53,7 @@ public class UserController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new AuthResponse(token, user.getEmail()));
+        return ResponseEntity.ok(new AuthResponse(user.getId(), user.getName(), user.getSurname(), user.getEmail(), token));
     }
 
     @DeleteMapping("/users/{id}")

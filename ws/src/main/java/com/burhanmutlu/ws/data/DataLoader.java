@@ -28,8 +28,8 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //List<CompanyResponse> val =  companyService.getAllCompaniesByUserId(1L);
-        //if(val == null) {
+        List<CompanyResponse> val =  companyService.getAllCompaniesByUserId(1L);
+        if(val == null) {
             createUser();
             createCompany("Instagram", "logo", "https://instagram.com");
             createCompany("Facebook", "logo", "https://facebook.com");
@@ -37,7 +37,7 @@ public class DataLoader implements CommandLineRunner {
             createCompany("GitHub", "logo", "https://github.com");
             createCompany("Google", "logo", "https://google.com");
             createCompany("Twitter", "logo", "https://twitter.com");
-        //}
+        }
     }
 
     public void createUser() throws MessagingException, IOException {
