@@ -3,6 +3,7 @@ package com.burhanmutlu.ws.favorite;
 import com.burhanmutlu.ws.favorite.child.FavoriteFile;
 import com.burhanmutlu.ws.favorite.child.FavoriteLogins;
 import com.burhanmutlu.ws.favorite.dto.req.FavoriteRequest;
+import com.burhanmutlu.ws.favorite.dto.resp.FavoriteResponse;
 import com.burhanmutlu.ws.user.User;
 import com.burhanmutlu.ws.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,13 +24,26 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     private final UserService userService;
 
+    private final FavoriteMapper favoriteMapper;
+
+
     @Override
-    public List<Favorite> getAllFavoritesByUser(User user) {
+    public List<FavoriteResponse> getAllFavoritesLoginsByUser(User user) {
         return null;
     }
 
     @Override
-    public Favorite getFavoriteById(Long id) {
+    public List<FavoriteResponse> getAllFavoritesFilesByUser(Long userId) {
+        User user = userService.getUserById(userId);
+        List<FavoriteResponse> favoriteList = new ArrayList<>();
+        favoriteRepository.findAllByUserId(user.getId()).forEach(favorite -> {
+            favoriteList.add(favoriteMapper.toFavoriteResponse(favorite));
+        });
+        return favoriteList;
+    }
+
+    @Override
+    public FavoriteResponse getFavoriteById(Long id) {
         return null;
     }
 

@@ -19,6 +19,7 @@ public class FileMapper {
         sizeConverter.autoConvert(file.getData().length);
 
         return FileResponse.builder()
+                .id(file.getId())
                 .name(file.getFileName())
                 .url(fileDownloadUri)
                 .size(sizeConverter.getSizeString())

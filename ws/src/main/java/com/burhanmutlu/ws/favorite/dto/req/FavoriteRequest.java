@@ -8,6 +8,6 @@ import javax.validation.constraints.NotNull;
 public class FavoriteRequest {
 
     @NotNull
-    private Long favoriteId;
+    private String favoriteId;
 
 }

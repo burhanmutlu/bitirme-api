@@ -20,7 +20,7 @@ public class Favorite {
     private Long id;
 
     @Column(name = "favorite_id", nullable = false)
-    private Long favoriteId;
+    private String favoriteId;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

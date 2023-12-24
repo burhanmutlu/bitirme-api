@@ -109,4 +109,21 @@ public class FileServiceImpl implements FileService {
 
         return fileResponseList;
     }
+
+    @Override
+    @Transactional
+    public List<FileResponse> getAllImagesByUserId(Long userId) {
+        User user = userService.getUserById(userId);
+        List<FileResponse> fileResponseList = new ArrayList<>();
+
+        fileRepository.findAllByUserId(userId).forEach(file -> {
+            if(file.getType().startsWith("image")) {
+                fileResponseList.add(fileMapper.toFileResponse(file));
+            }
+        });
+
+        log.info("getting all images..");
+
+        return fileResponseList;
+    }
 }

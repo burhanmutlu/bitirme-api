@@ -38,6 +38,12 @@ public class FileController {
         return ResponseEntity.ok(fileResponses);
     }
 
+    @GetMapping("/images/user/{userId}")
+    public ResponseEntity<List<FileResponse>> getAllImagesByUserId(@PathVariable("userId") Long userId) {
+        List<FileResponse> fileResponses = fileService.getAllImagesByUserId(userId);
+        return ResponseEntity.ok(fileResponses);
+    }
+
     @GetMapping("/files/{id}")
     public ResponseEntity<byte[]> getFileById(@PathVariable String id) {
         FileDataResponse fileDataResponse = fileService.getFileById(id);

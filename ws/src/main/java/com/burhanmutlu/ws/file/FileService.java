@@ -20,4 +20,6 @@ public interface FileService {
 
     List<FileResponse> getRecommended10FilesByUserId(Long userId);
 
+    List<FileResponse> getAllImagesByUserId(Long userId);
+
 }
