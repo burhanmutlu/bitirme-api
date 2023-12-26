@@ -55,7 +55,9 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.toUser(registrationRequest);
         user.setActivationToken(UUID.randomUUID().toString());
         userRepository.saveAndFlush(user);
+        log.info("created user");
         emailService.sendActivationEmail(user.getEmail(), user.getActivationToken());
+        log.info("sending activation email");
     }
 
     @Override
@@ -66,7 +68,7 @@ public class UserServiceImpl implements UserService {
         if(user == null) {
             throw new UserNotFoundException("User email not found - " + email);
         }
-
+        log.info("getting user by email");
         return user;
     }
 
@@ -77,6 +79,7 @@ public class UserServiceImpl implements UserService {
         if(user == null) {
             throw new UserNotFoundException("User id not found - " + id);
         }
+        log.info("getting user by id");
         return user;
     }
 
@@ -90,6 +93,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(userId).orElseThrow(()->{
             throw new UserNotFoundException("user not found");
         });
+        log.info("deleting user by id");
         userRepository.deleteById(userId);
     }
 
@@ -100,6 +104,7 @@ public class UserServiceImpl implements UserService {
         user.setPasswordResetToken(UUID.randomUUID().toString());
         userRepository.save(user);
         emailService.sendPasswordResetEmail(user.getEmail(), user.getPasswordResetToken());
+        log.info("handle reset request");
     }
 
     @Override
@@ -111,7 +116,9 @@ public class UserServiceImpl implements UserService {
         user.setActive(true);
         user.setActivationToken(null);
         userRepository.save(user);
+        log.info("activate user");
         emailService.sendWelcomeEmail(user.getEmail());
+        log.info("sending welcome email");
     }
 
     @Override
@@ -124,5 +131,6 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(passwordUpdateRequest.getPassword()));
         user.setActive(true);
         userRepository.save(user);
+        log.info("updating password");
     }
 }

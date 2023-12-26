@@ -10,6 +10,7 @@ public class FavoriteMapper {
 
     public FavoriteResponse toFavoriteResponse(Favorite favorite) {
         return FavoriteResponse.builder()
+                .id(favorite.getId())
                 .favoriteId(favorite.getFavoriteId())
                 .createdAt(favorite.getCreatedAt())
                 .build();

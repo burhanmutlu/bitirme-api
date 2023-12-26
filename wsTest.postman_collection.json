@@ -19,17 +19,23 @@
 							"type": "noauth"
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en-US",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"deneme\",\r\n    \"surname\": \"mutlu\",\r\n    \"password\": \"1234\",\r\n    \"phoneNumber\": \"0454554444\",\r\n    \"email\": \"b@m\"\r\n}",
+							"raw": "{\r\n    \"name\": \"ali mirza\",\r\n    \"surname\": \"doğan\",\r\n    \"password\": \"Burhan.01@\",\r\n    \"phoneNumber\": \"0454554444\",\r\n    \"email\": \"mutluburhack2dd@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8081/api/v1/register"
+						"url": "{{baseUrl}}/register"
 					},
 					"response": []
 				},
@@ -54,8 +60,8 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "",
-								"value": "",
+								"key": "Authorization",
+								"value": "Bearer null",
 								"type": "text",
 								"disabled": true
 							}
@@ -70,6 +76,84 @@
 							}
 						},
 						"url": "http://localhost:8081/api/v1/login"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUserById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{baseUrl}}/users/1"
+					},
+					"response": []
+				},
+				{
+					"name": "resetPassword",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"burhackmutlu@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/password-reset"
+					},
+					"response": []
+				},
+				{
+					"name": "updatePassword",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"Burhan.01+\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/4822a5b2-7639-4370-a329-8cd3f8c680c2/password"
+					},
+					"response": []
+				},
+				{
+					"name": "activateUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": "{{baseUrl}}/users/4822a5b2-7639-4370-a329-8cd3f8c680c2/active"
 					},
 					"response": []
 				}
@@ -112,7 +196,7 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8081/api/v1/companies/6"
+						"url": "{{baseUrl}}/companies/6"
 					},
 					"response": []
 				},
@@ -166,7 +250,7 @@
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:8081/api/v1/companies/1"
+						"url": "http://localhost:8081/api/v1/companies/8"
 					},
 					"response": []
 				},
@@ -274,14 +358,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"companyId\": 4,\r\n    \"username\": \"deneme\",\r\n    \"password\": \"denemepasss\"\r\n}",
+							"raw": "{\r\n    \"companyId\": 9,\r\n    \"username\": \"deneme\",\r\n    \"password\": \"denemepasss\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8081/api/v1/logins/user/1"
+						"url": "http://localhost:8081/api/v1/logins/user/2"
 					},
 					"response": []
 				},
@@ -342,14 +426,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"favoriteId\": 1589789785789789797\r\n}",
+							"raw": "{\r\n    \"favoriteId\": \"1589789785789789797\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8081/api/v1/favorites/logins/user/1"
+						"url": "{{token}}/favorites/logins/user/1"
 					},
 					"response": []
 				},
@@ -366,14 +450,41 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"favoriteId\": 3\r\n}",
+							"raw": "    {\r\n        \"favoriteId\": \"979c73fc-d1fa-4d9d-b1c8-bde0cef944ec\"\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8081/api/v1/favorites/files/user/1"
+						"url": "{{baseUrl}}/favorites/files/user/1"
+					},
+					"response": []
+				},
+				{
+					"name": "getAllFavFilesByUserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/favorites/files/user/1"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteFavoriteById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{baseUrl}}/favorites/4"
+					},
+					"response": []
+				},
+				{
+					"name": "getFavoriteById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/favorites/4"
 					},
 					"response": []
 				}
@@ -393,11 +504,11 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/D:/BST/gitRepo/bitirme-api/ws/src/main/java/com/burhanmutlu/ws/company/exception/CompanyNotFoundException.java"
+									"src": "/D:/burhan mutlu/Downloads/pexels-bess-hamiti-36487.jpg"
 								}
 							]
 						},
-						"url": "http://localhost:8081/api/v1/files/user/1"
+						"url": "{{baseUrl}}/files/user/1"
 					},
 					"response": []
 				},
@@ -406,7 +517,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8081/api/v1/files/user/1"
+						"url": "{{baseUrl}}/files/user/1"
 					},
 					"response": []
 				},
@@ -415,7 +526,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8081/api/v1/files/328acd34-8ed2-4358-8888-d6377d8f7b60"
+						"url": "{{baseUrl}}/files/5c375cd1-7ed5-4902-b123-ec9cd5ac6f89"
 					},
 					"response": []
 				},
@@ -442,7 +553,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:8081/api/v1/files/328acd34-8ed2-4358-8888-d6377d8f7b60"
+						"url": "http://localhost:8081/api/v1/files/aa3e5e5b-a3ed-48db-bd1a-7b15919a05cb"
 					},
 					"response": []
 				},
@@ -450,7 +561,17 @@
 					"name": "getRecommended10Files",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": "{{baseUrl}}/files/user/1/recommended"
+					},
+					"response": []
+				},
+				{
+					"name": "getAllImagesByUserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/images/user/1"
 					},
 					"response": []
 				}
@@ -473,7 +594,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:8081/api/v1/credit-cards/user/1"
+						"url": "{{baseUrl}}/credit-cards/user/1"
 					},
 					"response": []
 				},
@@ -482,7 +603,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8081/api/v1/credit-cards/user/1"
+						"url": "{{baseUrl}}/credit-cards/user/1"
 					},
 					"response": []
 				},
@@ -491,7 +612,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8081/api/v1/credit-cards/2"
+						"url": "{{baseUrl}}/credit-cards/2"
 					},
 					"response": []
 				},
@@ -555,6 +676,10 @@
 		{
 			"key": "token",
 			"value": ""
+		},
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8081/api/v1"
 		}
 	]
 }

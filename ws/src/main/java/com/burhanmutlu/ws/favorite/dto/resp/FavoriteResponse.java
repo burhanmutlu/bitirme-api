@@ -8,6 +8,7 @@ import java.util.Date;
 @Data
 @Builder
 public class FavoriteResponse {
+    private Long id;
     private Date createdAt;
     private String favoriteId;
 }

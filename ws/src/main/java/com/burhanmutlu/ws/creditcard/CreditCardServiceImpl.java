@@ -33,7 +33,7 @@ public class CreditCardServiceImpl implements CreditCardService {
         creditCardRepository.findAllByUserId(id).forEach(creditCard -> {
             creditCardResponseList.add(creditCardMapper.toCreditCardResponse(creditCard));
         });
-
+        log.info("getting all credit cards by user id");
         return creditCardResponseList;
     }
 
@@ -41,7 +41,7 @@ public class CreditCardServiceImpl implements CreditCardService {
     public CreditCardResponse getCreditCardById(Long id) {
         CreditCard creditCard = creditCardRepository.findById(id).orElseThrow(
                 ()->{ throw new CreditCardNotFoundException("credit card not found"); });
-
+        log.info("getting creadit card by id");
         return creditCardMapper.toCreditCardResponse(creditCard);
     }
 
@@ -53,7 +53,7 @@ public class CreditCardServiceImpl implements CreditCardService {
         creditCard.setUserId(user);
 
         creditCard = creditCardRepository.save(creditCard);
-
+        log.info("adding credit card by user id");
         return creditCardMapper.toCreditCardResponse(creditCard);
     }
 
@@ -68,7 +68,7 @@ public class CreditCardServiceImpl implements CreditCardService {
         creditCard.setId(id);
 
         creditCard = creditCardRepository.save(creditCard);
-
+        log.info("updating credit card by id");
         return creditCardMapper.toCreditCardResponse(creditCard);
     }
 
@@ -76,7 +76,7 @@ public class CreditCardServiceImpl implements CreditCardService {
     public void deleteCreditCard(Long id) {
         CreditCard creditCard = creditCardRepository.findById(id).orElseThrow(
                 ()->{ throw new CreditCardNotFoundException("credit card not found"); });
-
+        log.info("deleting credit card by id");
         creditCardRepository.deleteById(id);
     }
 }

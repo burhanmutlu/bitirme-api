@@ -44,6 +44,7 @@ public class CompanyServiceImpl implements CompanyService {
 
             companyResponseList.add(companyResponse);
         }
+        log.info("getting all companies by user id");
         return companyResponseList;
     }
 
@@ -58,7 +59,7 @@ public class CompanyServiceImpl implements CompanyService {
 
         CompanyResponse companyResponse = companyMapper.toCompanyResponse(company);
         companyResponse.setIsUpdatable(updatable);
-
+        log.info("getting company by id");
         return companyResponse;
     }
 
@@ -70,7 +71,7 @@ public class CompanyServiceImpl implements CompanyService {
         company.setUserId(user);
 
         company = companyRepository.save(company);
-
+        log.info("adding company by user id");
         return companyMapper.toCompanyResponse(company);
     }
 
@@ -86,7 +87,7 @@ public class CompanyServiceImpl implements CompanyService {
         company.setId(id);
 
         company = companyRepository.save(company);
-
+        log.info("updating company");
         return companyMapper.toCompanyResponse(company);
     }
 
@@ -96,6 +97,7 @@ public class CompanyServiceImpl implements CompanyService {
         if(company == null || company.getUserId().getId() == 1) {
             throw new RuntimeException("company not found or You do not have the authority to change");
         }
+        log.info("deleting company");
         companyRepository.deleteById(id);
     }
 }

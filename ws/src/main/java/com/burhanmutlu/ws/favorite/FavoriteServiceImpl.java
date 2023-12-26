@@ -4,6 +4,8 @@ import com.burhanmutlu.ws.favorite.child.FavoriteFile;
 import com.burhanmutlu.ws.favorite.child.FavoriteLogins;
 import com.burhanmutlu.ws.favorite.dto.req.FavoriteRequest;
 import com.burhanmutlu.ws.favorite.dto.resp.FavoriteResponse;
+import com.burhanmutlu.ws.favorite.exception.FavoriteNotFoundException;
+import com.burhanmutlu.ws.shared.NotAuthorityException;
 import com.burhanmutlu.ws.user.User;
 import com.burhanmutlu.ws.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +46,10 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     @Override
     public FavoriteResponse getFavoriteById(Long id) {
-        return null;
+        Favorite favorite = favoriteRepository.findById(id).orElseThrow(()-> {
+            throw new FavoriteNotFoundException();
+        });
+        return favoriteMapper.toFavoriteResponse(favorite);
     }
 
     @Override
@@ -71,6 +76,12 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     @Override
     public void deleteFavorite(Long id) {
-
+        Favorite favorite = favoriteRepository.findById(id).orElseThrow(()-> {
+            throw new FavoriteNotFoundException();
+        });
+        //TODO 1 yerine gerçek değeri yaz
+        //if( !(favorite.getUserId().getId() == 1) ) throw new NotAuthorityException();
+        log.info("deleting favorite by id");
+        favoriteRepository.deleteById(id);
     }
 }

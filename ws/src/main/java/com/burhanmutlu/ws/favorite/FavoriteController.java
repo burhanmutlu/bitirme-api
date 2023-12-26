@@ -37,6 +37,18 @@ public class FavoriteController {
         return ResponseEntity.ok(favoriteResponses);
     }
 
+    @GetMapping("/favorites/{id}")
+    public ResponseEntity<FavoriteResponse> getFavoriteById(@PathVariable Long id) {
+        FavoriteResponse favoriteResponse = favoriteService.getFavoriteById(id);
+        return ResponseEntity.ok(favoriteResponse);
+    }
+
+    @DeleteMapping("/favorites/{id}")
+    public ResponseEntity<GenericResponse> deleteFavoriteById(@PathVariable Long id) {
+        favoriteService.deleteFavorite(id);
+        return ResponseEntity.ok(new GenericResponse(true, "Favorite is deleted"));
+    }
+
 
 
 
