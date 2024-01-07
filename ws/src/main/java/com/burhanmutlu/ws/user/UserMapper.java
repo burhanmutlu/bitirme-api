@@ -17,7 +17,6 @@ public class UserMapper {
                 .surname(registrationRequest.getSurname())
                 .email(registrationRequest.getEmail())
                 .password(passwordEncoder.encode(registrationRequest.getPassword()))
-                .phoneNumber(registrationRequest.getPhoneNumber())
                 .build();
     }
 

@@ -9,13 +9,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice // Controller + responsebody
+@RestControllerAdvice
 public class UserExceptionHandler {
 
     @ExceptionHandler({
+            Exception.class,
             UserNotFoundException.class,
             CompanyNotFoundException.class,
-            NullPointerException.class
+            NullPointerException.class,
+
     })
     public ResponseEntity<ErrorResponse> handleException(Exception exception, HttpServletRequest request) {
 
@@ -26,6 +28,7 @@ public class UserExceptionHandler {
         errorResponse.setMessage(exception.getMessage());
         errorResponse.setTimeStamp(System.currentTimeMillis());
 
+
         if(exception instanceof UserNotFoundException) {
             errorResponse.setStatus(HttpStatus.BAD_REQUEST.value());
         } else if (exception instanceof Exception) {
@@ -34,6 +37,8 @@ public class UserExceptionHandler {
             errorResponse.setStatus(HttpStatus.BAD_REQUEST.value());
         } else if(exception instanceof NullPointerException) {
             errorResponse.setStatus(HttpStatus.BAD_REQUEST.value());
+        } else {
+
         }
 
         return ResponseEntity.status(errorResponse.getStatus()).body(errorResponse);

@@ -20,15 +20,11 @@ public class RegistrationRequest {
     private String surname;
 
     @NotNull(message = "{constraint.email.notnull.message}")
-    @Email
+    @Email(message = "hatalı")
     private String email;
 
     @NotNull
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+.=])(?=\\S+$).{8,}$")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+.=])(?=\\S+$).{8,16}$")
     private String password;
-
-    @NotNull
-    @Size(min = 10, max = 15)
-    private String phoneNumber;
 
 }

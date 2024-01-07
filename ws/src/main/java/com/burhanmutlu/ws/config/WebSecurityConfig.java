@@ -38,7 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-ui",
             "/v3/api-docs/**",
             "/swagger-ui.html",
-            "/api/v1/users/password-reset"
+            "/api/v1/users/password-reset",
+            "/api/v1/users/valid-token"
     };
 
     @Override

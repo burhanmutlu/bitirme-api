@@ -1,12 +1,9 @@
 package com.burhanmutlu.ws.user;
 
 import com.burhanmutlu.ws.shared.LocalMessages;
-import com.burhanmutlu.ws.user.dto.req.PasswordResetRequest;
-import com.burhanmutlu.ws.user.dto.req.PasswordUpdateRequest;
+import com.burhanmutlu.ws.user.dto.req.*;
 import com.burhanmutlu.ws.user.dto.resp.AuthResponse;
 import com.burhanmutlu.ws.shared.GenericResponse;
-import com.burhanmutlu.ws.user.dto.req.LoginRequest;
-import com.burhanmutlu.ws.user.dto.req.RegistrationRequest;
 import com.burhanmutlu.ws.security.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -81,6 +78,13 @@ public class UserController {
     public ResponseEntity<?> activateUser(@PathVariable String token) throws MessagingException, IOException {
         userService.activateUser(token);
         return ResponseEntity.ok(new GenericResponse(true, "success"));
+    }
+
+    @PostMapping("/users/valid-token")
+    public ResponseEntity<?> isValidToken(@RequestBody ValidTokenRequest jwtToken) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(jwtTokenUtil.extractUsername(jwtToken.getJwtToken()));
+        boolean val = jwtTokenUtil.validateToken(jwtToken.getJwtToken(), userDetails);
+        return ResponseEntity.ok(new GenericResponse(val,(val==true)?"geçerli":"geçersiz"));
     }
 
 

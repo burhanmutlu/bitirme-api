@@ -38,9 +38,6 @@ public class User extends BaseEntity {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "phone_number")
-    private String phoneNumber;
-
     private boolean isActive;
 
     private String activationToken;

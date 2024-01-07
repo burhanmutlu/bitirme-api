@@ -14,7 +14,11 @@ import java.nio.file.AccessDeniedException;
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({DisabledException.class, AccessDeniedException.class})
+    @ExceptionHandler({
+            DisabledException.class,
+            AccessDeniedException.class,
+            NotAuthorityException.class
+    })
     ResponseEntity<?> handleDisabledException(Exception exception, HttpServletRequest request){
         ErrorResponse errorResponse = new ErrorResponse();
 

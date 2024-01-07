@@ -52,7 +52,7 @@ public class JwtTokenUtil {
         return Jwts.builder().setClaims(claims)
                 .setSubject(subject) // ilgili kullanıcı
                 .setIssuedAt(new Date(System.currentTimeMillis())) // başlangıç
-                .setExpiration(new Date(System.currentTimeMillis() + 12 * 60 * 60 * 1000)) // bitiş 12 saat
+                .setExpiration(new Date(System.currentTimeMillis() + 48 * 60 * 60 * 1000)) // bitiş 48 saat
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY) // kullanılan algoritma ve bu algoritma çalışırken kullanılacak hash key değeri
                 .compact();
     }
